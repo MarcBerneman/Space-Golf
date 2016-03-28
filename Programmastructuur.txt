@@ -1,5 +1,11 @@
 Space Golf
 
 Klasse Bal
+	double x,y,v_x,v_y;
 
 Klasse Planeet
+	int x,y,r,m;
+
+Klasse Level
+	Bal golfbal;
+	Planeet[] planeten;
