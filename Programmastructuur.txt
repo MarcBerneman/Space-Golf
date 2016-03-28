@@ -1,10 +1,15 @@
 Space Golf
 
+Klasse Vector
+	double x,y;
+
 Klasse Bal
-	double x,y,v_x,v_y;
+	Vector plaats;
+	Vector snelheid;
 
 Klasse Planeet
-	int x,y,r,m;
+	Vector middelpunt;
+	int r,m;
 
 Klasse Level
 	Bal golfbal;
