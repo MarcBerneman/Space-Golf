@@ -1,6 +1,6 @@
-package Spelelementen;
+package spelelementen;
 
-import Tools.Vector;
+import tools.Vector;
 
 public class Bal {
 	Vector plaats;

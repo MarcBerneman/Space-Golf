@@ -1,4 +1,4 @@
-package Tools;
+package tools;
 
 public class Vector {
 	double x, y;
@@ -18,5 +18,9 @@ public class Vector {
 	
 	public static Vector aftrekking(Vector a, Vector b) {
 		return new Vector(a.x - b.x, a.y - b.y);
+	}
+	
+	public static Vector scalair_vermenigvuldiging(double a, Vector r) {
+		return new Vector(a*r.x,a*r.y);
 	}
 }
