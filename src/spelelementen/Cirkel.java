@@ -38,6 +38,6 @@ public class Cirkel {
 	
 	public void drawCirkel(Graphics g) {
 		g.setColor(kleur);
-		g.fillOval((int) plaats.x, (int) plaats.y, straal*2, straal*2);
+		g.fillOval((int) plaats.x- straal, (int) plaats.y - straal, straal*2, straal*2);
 	}
 }
