@@ -6,7 +6,7 @@ https://www.youtube.com/watch?v=0fKg7e37bQE
 
 Belangrijke commando:
 
--cd: current directory
+-cd: change directory
 
 -cd.. om naar vorige map te gaan
 
@@ -14,7 +14,7 @@ Belangrijke commando:
 
 Stappenplan om het project te kunnen aanpassen:
 
--git clone https://github.com/MarcBerneman/Space-Golf.git (het wordt gekopieerd in de current directory of cd)
+-git clone https://github.com/MarcBerneman/Space-Golf.git (het wordt gekopieerd in de current directory)
 
 -in eclipse ga je naar import.. -> java project en selecteer je die map
 
