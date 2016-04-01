@@ -1,7 +1,6 @@
 package spelelementen;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 import tools.Vector;
 
@@ -35,5 +34,5 @@ public class Cirkel {
 				return true;
 		return false;
 	}
-	
+
 }
