@@ -20,7 +20,7 @@ public class Level {
 		for(Planeet planeet : planeten)
 			F_tot = Vector.optelling(F_tot, planeet.zwaartekrachtveld(golfbal.plaats));
 		F_tot = Vector.scalair_vermenigvuldiging((double) golfbal.massa, F_tot);
-		//Nog te doen: snelheid van bal aanpassen en dan plaats van bal aanpassen.
+		//Nog te doen: snelheid van bal aanpassen en dan plaats van bal aanpassen .
 	}
 
 }
