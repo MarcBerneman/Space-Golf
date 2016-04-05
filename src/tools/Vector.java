@@ -7,6 +7,7 @@ public class Vector {
 		this.x = x;
 		this.y = y;
 	}
+	//Dit is zware shit
 
 	public double modulus() {
 		return Math.sqrt(x * x + y * y);
