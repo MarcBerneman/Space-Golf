@@ -1,6 +1,7 @@
 package spelelementen;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 import tools.Vector;
 
@@ -33,6 +34,11 @@ public class Cirkel {
 			if (this.isColiding(cirkel))
 				return true;
 		return false;
+	}
+
+	public void paintme(Graphics g) {
+		g.setColor(kleur);
+		g.fillOval((int) plaats.x - straal, (int) plaats.y - straal, straal * 2, straal * 2);
 	}
 
 }

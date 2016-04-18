@@ -15,15 +15,15 @@ public class Vector {
 	public static Vector optelling(Vector a, Vector b) {
 		return new Vector(a.x + b.x, a.y + b.y);
 	}
-	
+
 	public static Vector aftrekking(Vector a, Vector b) {
 		return new Vector(a.x - b.x, a.y - b.y);
 	}
-	
+
 	public static Vector scalair_vermenigvuldiging(double a, Vector r) {
-		return new Vector(a*r.x,a*r.y);
+		return new Vector(a * r.x, a * r.y);
 	}
-	
+
 	public void optelling(Vector other) {
 		this.x += other.x;
 		this.y += other.y;
