@@ -7,6 +7,7 @@ import tools.Vector;
 public class Level {
 	Bal golfbal;
 	Planeet[] planeten;
+	final static double DeltaT = 0.01;
 	
 	public Level() {
 		golfbal = new Bal(250,150, 1, 5,Color.WHITE);
@@ -20,6 +21,11 @@ public class Level {
 		for(Planeet planeet : planeten)
 			F_tot = Vector.optelling(F_tot, planeet.zwaartekrachtveld(golfbal.plaats));
 		F_tot = Vector.scalair_vermenigvuldiging((double) golfbal.massa, F_tot);
+		golfbal.snelheid.optelling(Vector.scalair_vermenigvuldiging(DeltaT/golfbal.massa, F_tot));
+		golfbal.plaats.optelling(Vector.scalair_vermenigvuldiging(DeltaT, golfbal.snelheid));
+		if(golfbal.isColiding(planeten)) {
+			
+		}
 		//Nog te doen: snelheid van bal aanpassen en dan plaats van bal aanpassen .
 	}
 

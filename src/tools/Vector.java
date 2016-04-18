@@ -23,4 +23,9 @@ public class Vector {
 	public static Vector scalair_vermenigvuldiging(double a, Vector r) {
 		return new Vector(a*r.x,a*r.y);
 	}
+	
+	public void optelling(Vector other) {
+		this.x += other.x;
+		this.y += other.y;
+	}
 }
