@@ -24,11 +24,21 @@ public class Vector {
 		return new Vector(a * r.x, a * r.y);
 	}
 
+	public void scalair_vermenigvuldiging(double a) {
+		x *= a;
+		y *= a;
+	}
+
 	public void optelling(Vector other) {
 		this.x += other.x;
 		this.y += other.y;
 	}
-	public String toString(){
-		return "("+x+","+y+")";
+
+	public double scalair_product(Vector a, Vector b) {
+		return a.x * b.x + a.y * b.y;
+	}
+
+	public String toString() {
+		return "(" + x + "," + y + ")";
 	}
 }

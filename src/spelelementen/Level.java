@@ -22,12 +22,21 @@ public class Level {
 			F_tot = Vector.optelling(F_tot, planeet.zwaartekrachtveld(golfbal.plaats));
 		F_tot = Vector.scalair_vermenigvuldiging((double) golfbal.massa, F_tot);
 		golfbal.snelheid.optelling(Vector.scalair_vermenigvuldiging(DeltaT / golfbal.massa, F_tot));
+		for (Planeet planeet : planeten) {
+			if (golfbal.isColiding(planeet)) {
+				Vector n = Vector.aftrekking(planeet.plaats, golfbal.plaats);
+				double theta;
+				if(n.y >= 0) 
+					theta = Math.acos(n.x / n.modulus());
+				else
+					theta = 2*Math.PI - Math.acos(n.x / n.modulus());
+				golfbal.snelheid = new Vector(
+						-golfbal.snelheid.x * Math.cos(2 * theta) - golfbal.snelheid.y * Math.sin(2 * theta),
+						-golfbal.snelheid.x * Math.sin(2 * theta) + golfbal.snelheid.y * Math.cos(2 * theta));
+				golfbal.snelheid.scalair_vermenigvuldiging(Bal.COR);
+				break;
+			}
+		}
 		golfbal.plaats.optelling(Vector.scalair_vermenigvuldiging(DeltaT, golfbal.snelheid));
-		// if(golfbal.isColiding(planeten)) {
-		//
-		// }
-		// Nog te doen: snelheid van bal aanpassen en dan plaats van bal
-		// aanpassen .
 	}
-
 }

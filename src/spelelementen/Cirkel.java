@@ -24,17 +24,17 @@ public class Cirkel {
 		this.kleur = kleur;
 	}
 
-	private boolean isColiding(Cirkel other) {
+	public boolean isColiding(Cirkel other) {
 		Vector this_to_other = Vector.aftrekking(this.plaats, other.plaats);
 		return this_to_other.modulus() <= this.straal + other.straal;
 	}
 
-	public boolean isColiding(Cirkel[] Cirkels) {
-		for (Cirkel cirkel : Cirkels)
-			if (this.isColiding(cirkel))
-				return true;
-		return false;
-	}
+//	public boolean isColiding(Cirkel[] Cirkels) {
+//		for (Cirkel cirkel : Cirkels)
+//			if (this.isColiding(cirkel))
+//				return true;
+//		return false;
+//	}
 
 	public void paintme(Graphics g) {
 		g.setColor(kleur);

@@ -14,7 +14,6 @@ public class Balbeweging extends TimerTask {
 	public void run() {
 		panel.level.turn();
 		panel.repaint();
-		System.out.println(panel.level.golfbal.snelheid);
 	}
 
 }
