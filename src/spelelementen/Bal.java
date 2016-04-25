@@ -14,6 +14,7 @@ public class Bal extends Cirkel {
 
 	public Bal(int x, int y, int massa, int straal, Color kleur) {
 		super(x, y, massa, straal, kleur);
+		this.snelheid = new Vector(0,0);
 	}
 
 }
