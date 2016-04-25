@@ -6,7 +6,7 @@ import tools.Vector;
 
 public class Planeet extends Cirkel {
 
-	final static double G = 0.0000000000667;
+	final static double G = 10;
 
 	public Planeet(Vector plaats, int massa, int straal, Color kleur) {
 		super(plaats, massa, straal, kleur);

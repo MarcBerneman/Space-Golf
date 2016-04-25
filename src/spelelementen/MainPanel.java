@@ -2,17 +2,19 @@ package spelelementen;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Timer;
 
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel {
 	Level level;
+	Timer timer = new Timer();
 
 	public MainPanel(Level level) {
 		this.level = level;
 		setBackground(Color.BLACK);
-		System.out.println(level.golfbal.isColiding(level.planeten));
+		timer.schedule(new Balbeweging(this), 0, (long) (Level.DeltaT*1000));
 	}
 
 	public void paint(Graphics g) {

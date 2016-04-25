@@ -28,4 +28,7 @@ public class Vector {
 		this.x += other.x;
 		this.y += other.y;
 	}
+	public String toString(){
+		return "("+x+","+y+")";
+	}
 }
