@@ -6,9 +6,9 @@ import java.awt.Graphics;
 import tools.Vector;
 
 public class Cirkel {
-	Vector plaats;
-	int massa, straal;
-	Color kleur;
+	private Vector plaats;
+	private final int massa, straal;
+	private final Color kleur;
 
 	public Cirkel(Vector plaats, int massa, int straal, Color kleur) {
 		this.plaats = plaats;
@@ -29,16 +29,21 @@ public class Cirkel {
 		return this_to_other.modulus() <= this.straal + other.straal;
 	}
 
-//	public boolean isColiding(Cirkel[] Cirkels) {
-//		for (Cirkel cirkel : Cirkels)
-//			if (this.isColiding(cirkel))
-//				return true;
-//		return false;
-//	}
-
 	public void paintme(Graphics g) {
 		g.setColor(kleur);
-		g.fillOval((int) plaats.x - straal, (int) plaats.y - straal, straal * 2, straal * 2);
+		g.fillOval((int) plaats.getX() - straal, (int) plaats.getY() - straal, straal * 2, straal * 2);
+	}
+
+	public Vector getPlaats() {
+		return plaats;
+	}
+
+	public void setPlaats(Vector plaats) {
+		this.plaats = plaats;
+	}
+
+	public int getMassa() {
+		return massa;
 	}
 
 }

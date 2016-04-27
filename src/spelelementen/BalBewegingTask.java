@@ -2,17 +2,16 @@ package spelelementen;
 
 import java.util.TimerTask;
 
-import javax.swing.JPanel;
-
-public class Balbeweging extends TimerTask {
+public class BalBewegingTask extends TimerTask {
 	private MainPanel panel;
-	public Balbeweging(MainPanel panel) {
+
+	public BalBewegingTask(MainPanel panel) {
 		this.panel = panel;
 	}
 
 	@Override
 	public void run() {
-		panel.level.turn();
+		panel.getLevel().turn();
 		panel.repaint();
 	}
 

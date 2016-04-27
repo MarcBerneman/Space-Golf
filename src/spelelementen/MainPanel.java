@@ -8,13 +8,13 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel {
-	Level level;
-	Timer timer = new Timer();
+	private Level level;
+	private Timer timer = new Timer();
 
 	public MainPanel(Level level) {
 		this.level = level;
 		setBackground(Color.BLACK);
-		timer.schedule(new Balbeweging(this), 0, (long) (Level.DeltaT*1000));
+		timer.schedule(new BalBewegingTask(this), 0, (long) (MainFrame.DeltaT * 1000));
 	}
 
 	public void paint(Graphics g) {
@@ -24,4 +24,9 @@ public class MainPanel extends JPanel {
 		}
 		level.golfbal.paintme(g);
 	}
+
+	public Level getLevel() {
+		return level;
+	}
+
 }

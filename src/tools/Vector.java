@@ -1,7 +1,7 @@
 package tools;
 
 public class Vector {
-	public double x, y;
+	private double x, y;
 
 	public Vector(double x, double y) {
 		this.x = x;
@@ -40,5 +40,21 @@ public class Vector {
 
 	public String toString() {
 		return "(" + x + "," + y + ")";
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
 	}
 }
