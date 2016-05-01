@@ -1,7 +1,7 @@
 package tools;
 
 public class Vector {
-	public double x, y;
+	private double x, y;
 
 	public Vector(double x, double y) {
 		this.x = x;
@@ -25,11 +25,37 @@ public class Vector {
 		return new Vector(a * r.x, a * r.y);
 	}
 
+	public void scalair_vermenigvuldiging(double a) {
+		x *= a;
+		y *= a;
+	}
+
 	public void optelling(Vector other) {
 		this.x += other.x;
 		this.y += other.y;
 	}
-	public String toString(){
-		return "("+x+","+y+")";
+
+	public double scalair_product(Vector a, Vector b) {
+		return a.x * b.x + a.y * b.y;
+	}
+
+	public String toString() {
+		return "(" + x + "," + y + ")";
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
 	}
 }
