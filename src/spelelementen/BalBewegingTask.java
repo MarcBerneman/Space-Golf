@@ -1,5 +1,6 @@
 package spelelementen;
 
+import java.util.Timer;
 import java.util.TimerTask;
 
 public class BalBewegingTask extends TimerTask {
@@ -13,6 +14,11 @@ public class BalBewegingTask extends TimerTask {
 	public void run() {
 		panel.getLevel().turn();
 		panel.repaint();
+		if (panel.getLevel().golfbal.isStationary) {
+			panel.timer.cancel();
+			panel.timer = new Timer();
+			System.out.println("next round");
+		}
 	}
 
 }
