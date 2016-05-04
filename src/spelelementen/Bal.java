@@ -6,7 +6,6 @@ import tools.Vector;
 
 public class Bal extends Cirkel {
 	private Vector snelheid;
-	final static double COR = 0.65; // Coëfficient of Restitution
 	public boolean isStationary = true;
 
 	public Bal(Vector plaats, int massa, int straal, Color kleur) {

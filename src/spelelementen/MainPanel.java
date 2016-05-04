@@ -37,7 +37,8 @@ public class MainPanel extends JPanel implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Mouse Clicked");
 		if(level.golfbal.isStationary) {
-			level.golfbal.setSnelheid(Vector.aftrekking(new Vector(e.getX(),e.getY()), level.golfbal.getPlaats()));
+			Vector snelheid = Vector.aftrekking(new Vector(e.getX(),e.getY()), level.golfbal.getPlaats());
+			level.golfbal.setSnelheid(Vector.scalair_vermenigvuldiging(MainFrame.MOUSE_SPEED_COEFFICIENT, snelheid));
 			level.golfbal.isStationary = false;
 			timer.schedule(new BalBewegingTask(this), 0, (long) (MainFrame.DeltaT * 1000));
 		}
