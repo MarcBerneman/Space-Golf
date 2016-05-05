@@ -39,7 +39,7 @@ public class Level {
 								+ golfbal.getSnelheid().getY() * Math.cos(2 * theta))));
 				golfbal.Correctie(planeet);
 				movingaverage.add(golfbal.getPlaats());
-				if (movingaverage.average() < MainFrame.SPEED_THRESHHOLD) {
+				if (movingaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
 					golfbal.isStationary = true;
 					movingaverage.initialize();
 				}

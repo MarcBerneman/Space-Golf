@@ -17,7 +17,7 @@ public class BalBewegingTask extends TimerTask {
 		if (panel.getLevel().golfbal.isStationary) {
 			panel.timer.cancel();
 			panel.timer = new Timer();
-			System.out.println("next round");
+			System.out.println("Next Turn");
 		}
 	}
 

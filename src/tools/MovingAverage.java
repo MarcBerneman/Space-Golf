@@ -27,7 +27,7 @@ public class MovingAverage {
 
 	public void initialize() {
 		for (int i = 0; i < list.length; i++)
-			list[i] = new Vector(0,0); // Vermijden dat het gemiddelde 0 is in het begin
+			list[i] = new Vector(0,0);
 	}
 
 	public String toString() {
