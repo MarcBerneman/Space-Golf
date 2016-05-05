@@ -25,11 +25,12 @@ public class Bal extends Cirkel {
 	public void setSnelheid(Vector snelheid) {
 		this.snelheid = snelheid;
 	}
-	
+
 	public void Correctie(Planeet ColidingPlanet) {
-		Vector n = Vector.aftrekking(getPlaats() , ColidingPlanet.getPlaats());
+		Vector n = Vector.aftrekking(getPlaats(), ColidingPlanet.getPlaats());
 		n.scalair_vermenigvuldiging((this.getStraal() + ColidingPlanet.getStraal()) / n.modulus());
 		setPlaats(Vector.optelling(ColidingPlanet.getPlaats(), n));
+		// Beweegt de bal zodat het niet in de planeet is
 	}
 
 }

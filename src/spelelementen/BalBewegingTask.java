@@ -1,10 +1,9 @@
 package spelelementen;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 public class BalBewegingTask extends TimerTask {
-	private MainPanel panel;
+	private final MainPanel panel;
 
 	public BalBewegingTask(MainPanel panel) {
 		this.panel = panel;
@@ -12,11 +11,12 @@ public class BalBewegingTask extends TimerTask {
 
 	@Override
 	public void run() {
-		panel.getLevel().turn();
-		panel.repaint();
-		if (panel.getLevel().golfbal.isStationary) {
-			panel.timer.cancel();
-			panel.timer = new Timer();
+		if (!panel.getLevel().getGolfbal().isStationary) {
+			panel.getLevel().turn();
+			panel.repaint();
+		} else {
+			panel.getTimer().cancel();
+			panel.ReinitializeTimer();
 			System.out.println("Next Turn");
 		}
 	}

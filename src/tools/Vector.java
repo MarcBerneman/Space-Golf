@@ -62,4 +62,8 @@ public class Vector {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	public Vector clone() {
+		return new Vector(x,y);
+	}
 }

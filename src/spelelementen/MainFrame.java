@@ -8,7 +8,7 @@ public class MainFrame extends JFrame {
 	public final static double µ = 0.45; // Wrijvingscoëfficient
 	public final static double COR = 0.75; // Coëfficient of Restitution
 	public final static double DeltaT = 0.005;
-	public final static double MOUSE_SPEED_COEFFICIENT = 1.25;
+	public final static double MOUSE_SPEED_COEFFICIENT = 1.25; 
 	public final static double MINIMAL_AVERAGE_MOVEMENT = 1.5;
 
 	public MainFrame() {
