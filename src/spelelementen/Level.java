@@ -8,7 +8,7 @@ import tools.Vector;
 public class Level {
 	private final Bal golfbal;
 	private final Planeet[] planeten;
-	private final PositionAverage movingaverage = new PositionAverage(10);
+	private final PositionAverage positionaverage = new PositionAverage(10);
 	private final Vector startPos;
 
 	public Level() {
@@ -49,11 +49,11 @@ public class Level {
 							MainFrame.µ * (getGolfbal().getSnelheid().getX() * Math.sin(2 * theta)
 									+ getGolfbal().getSnelheid().getY() * Math.cos(2 * theta))));
 					getGolfbal().Correctie(planeet);
-					movingaverage.add(getGolfbal().getPlaats());
-					if (movingaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
+					positionaverage.add(getGolfbal().getPlaats());
+					if (positionaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
 						// Bal mag alleen stoppen op planeet
 						getGolfbal().isStationary = true;
-						movingaverage.initialize();
+						positionaverage.initialize();
 						// Voorbereiding op volgend schot
 					}
 					break; // Bal kan alleen met 1 planeet botsen
