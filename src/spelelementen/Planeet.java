@@ -6,8 +6,6 @@ import tools.Vector;
 
 public class Planeet extends Cirkel {
 
-	final static double G = 1500;
-
 	public Planeet(Vector plaats, int massa, int straal, Color kleur) {
 		super(plaats, massa, straal, kleur);
 	}
@@ -18,6 +16,6 @@ public class Planeet extends Cirkel {
 
 	public Vector zwaartekrachtveld(Vector r) {
 		Vector r_min_ri = Vector.aftrekking(r, getPlaats());
-		return Vector.scalair_vermenigvuldiging(-G * getMassa() / Math.pow(r_min_ri.modulus(), 3), r_min_ri);
+		return Vector.scalair_vermenigvuldiging(-MainFrame.G * getMassa() / Math.pow(r_min_ri.modulus(), 3), r_min_ri);
 	}
 }

@@ -26,7 +26,7 @@ public class Cirkel {
 
 	public boolean isColiding(Cirkel other) {
 		Vector this_to_other = Vector.aftrekking(this.plaats, other.plaats);
-		return this_to_other.modulus() <= this.straal + other.straal;
+		return this_to_other.modulus() < this.straal + other.straal;
 	}
 
 	public void paintme(Graphics g) {
@@ -44,6 +44,10 @@ public class Cirkel {
 
 	public int getMassa() {
 		return massa;
+	}
+
+	public int getStraal() {
+		return straal;
 	}
 
 }

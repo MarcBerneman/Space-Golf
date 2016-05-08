@@ -34,6 +34,11 @@ public class Vector {
 		this.x += other.x;
 		this.y += other.y;
 	}
+	
+	public void aftrekking(Vector other) {
+		this.x -= other.x;
+		this.y -= other.y;
+	}
 
 	public double scalair_product(Vector a, Vector b) {
 		return a.x * b.x + a.y * b.y;
@@ -57,5 +62,9 @@ public class Vector {
 
 	public void setY(double y) {
 		this.y = y;
+	}
+	
+	public Vector clone() {
+		return new Vector(x,y);
 	}
 }

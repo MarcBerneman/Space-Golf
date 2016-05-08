@@ -6,7 +6,7 @@ import tools.Vector;
 
 public class Bal extends Cirkel {
 	private Vector snelheid;
-	final static double COR = 0.85; // Coëfficient of Restitution
+	public boolean isStationary = true;
 
 	public Bal(Vector plaats, int massa, int straal, Color kleur) {
 		super(plaats, massa, straal, kleur);
@@ -24,6 +24,13 @@ public class Bal extends Cirkel {
 
 	public void setSnelheid(Vector snelheid) {
 		this.snelheid = snelheid;
+	}
+
+	public void Correctie(Planeet ColidingPlanet) {
+		Vector n = Vector.aftrekking(getPlaats(), ColidingPlanet.getPlaats());
+		n.scalair_vermenigvuldiging((this.getStraal() + ColidingPlanet.getStraal()) / n.modulus());
+		setPlaats(Vector.optelling(ColidingPlanet.getPlaats(), n));
+		// Beweegt de bal zodat het niet in de planeet is
 	}
 
 }
