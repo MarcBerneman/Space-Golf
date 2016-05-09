@@ -15,8 +15,8 @@ public class BalBewegingTask extends TimerTask {
 			panel.getLevel().turn();
 			panel.repaint();
 		} else {
-			panel.getTimer().cancel();
-			panel.ReinitializeTimer();
+			//panel.getTimer().cancel();
+			//panel.ReinitializeTimer();
 			System.out.println("Next Turn");
 		}
 	}

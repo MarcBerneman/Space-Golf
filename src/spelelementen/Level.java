@@ -10,6 +10,7 @@ public class Level {
 	private final Planeet[] planeten;
 	private final PositionAverage positionaverage = new PositionAverage(10);
 	private final Vector startPos;
+	private final Hole hole;
 
 	public Level() {
 		startPos = new Vector(250, 150);
@@ -18,6 +19,7 @@ public class Level {
 		getPlaneten()[0] = new Planeet(250, 350, 500, 35, Color.BLUE);
 		getPlaneten()[1] = new Planeet(100, 200, 1000, 80, Color.MAGENTA);
 		getPlaneten()[2] = new Planeet(400, 200, 1000, 65, Color.GREEN);
+		hole = new Hole(getPlaneten()[0],Math.PI, 10);
 	}
 
 	public void ResetBall() {
@@ -46,7 +48,7 @@ public class Level {
 					getGolfbal().setSnelheid(new Vector(
 							MainFrame.COR * (-getGolfbal().getSnelheid().getX() * Math.cos(2 * theta)
 									+ getGolfbal().getSnelheid().getY() * Math.sin(2 * theta)),
-							MainFrame.µ * (getGolfbal().getSnelheid().getX() * Math.sin(2 * theta)
+							MainFrame.WR * (getGolfbal().getSnelheid().getX() * Math.sin(2 * theta)
 									+ getGolfbal().getSnelheid().getY() * Math.cos(2 * theta))));
 					getGolfbal().Correctie(planeet);
 					positionaverage.add(getGolfbal().getPlaats());
@@ -61,6 +63,9 @@ public class Level {
 			}
 			getGolfbal().getPlaats().optelling(Vector.scalair_vermenigvuldiging(MainFrame.DeltaT, getGolfbal().getSnelheid()));
 		}
+		if(hole.Score(golfbal)){
+			System.out.println("Score!!!!!!!");
+		}
 	}
 
 	public Bal getGolfbal() {
@@ -69,5 +74,8 @@ public class Level {
 
 	public Planeet[] getPlaneten() {
 		return planeten;
+	}
+	public Hole getHole(){
+		return hole;
 	}
 }
