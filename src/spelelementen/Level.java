@@ -1,6 +1,7 @@
 package spelelementen;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 import tools.PositionAverage;
 import tools.Vector;
@@ -29,28 +30,9 @@ public class Level {
 
 	public void turn() {
 		if (!getGolfbal().isStationary()) {
-			Vector F_tot = new Vector(0, 0);
-			for (Planeet planeet : getPlaneten())
-				F_tot = Vector.optelling(F_tot, planeet.zwaartekrachtveld(getGolfbal().getPlaats()));
-			// F_tot = E_tot * m_golfbal
-			F_tot = Vector.scalair_vermenigvuldiging((double) getGolfbal().getMassa(), F_tot);
-			// V = V + DeltaV = V + (DeltaT / m_golfbal) * F_tot
-			getGolfbal().getSnelheid()
-					.optelling(Vector.scalair_vermenigvuldiging(MainFrame.DeltaT / getGolfbal().getMassa(), F_tot));
+			Traject.Berekening(golfbal, planeten);
 			for (Planeet planeet : getPlaneten()) {
 				if (getGolfbal().isColiding(planeet)) {
-					Vector bal_to_planeet = Vector.aftrekking(planeet.getPlaats(), getGolfbal().getPlaats());
-					double theta; // hoek van botsing met planeet
-					if (bal_to_planeet.getY() <= 0)
-						theta = Math.acos(bal_to_planeet.getX() / bal_to_planeet.modulus());
-					else
-						theta = 2 * Math.PI - Math.acos(bal_to_planeet.getX() / bal_to_planeet.modulus());
-					getGolfbal().setSnelheid(new Vector(
-							MainFrame.COR * (-getGolfbal().getSnelheid().getX() * Math.cos(2 * theta)
-									+ getGolfbal().getSnelheid().getY() * Math.sin(2 * theta)),
-							MainFrame.WR * (getGolfbal().getSnelheid().getX() * Math.sin(2 * theta)
-									+ getGolfbal().getSnelheid().getY() * Math.cos(2 * theta))));
-					getGolfbal().Correctie(planeet);
 					positionaverage.add(getGolfbal().getPlaats());
 					if (positionaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
 						// Bal mag alleen stoppen op planeet
@@ -61,7 +43,6 @@ public class Level {
 					break; // Bal kan alleen met 1 planeet botsen
 				}
 			}
-			getGolfbal().getPlaats().optelling(Vector.scalair_vermenigvuldiging(MainFrame.DeltaT, getGolfbal().getSnelheid()));
 		}
 		if(hole.Score(golfbal)){
 			System.out.println("Score!!!!!!!");

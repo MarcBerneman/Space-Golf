@@ -66,7 +66,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
+		Traject.muis_positie = new Vector(e.getX(),e.getY());
 		
 	}
 

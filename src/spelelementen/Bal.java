@@ -35,8 +35,8 @@ public class Bal extends Cirkel {
 	
 	public Vector InitialSpeed(Vector MousePosition) {
 		Vector snelheid = Vector.aftrekking(MousePosition, getPlaats());
-		if(snelheid.modulus() > MainFrame.SPEED_LIMIT)
-			snelheid.scalair_vermenigvuldiging(MainFrame.SPEED_LIMIT/snelheid.modulus());
+		if(snelheid.modulus() > MainFrame.MAX_POWER)
+			snelheid.scalair_vermenigvuldiging(MainFrame.MAX_POWER/snelheid.modulus());
 		return Vector.scalair_vermenigvuldiging(MainFrame.MOUSE_SPEED_COEFFICIENT, snelheid);
 	}
 	
