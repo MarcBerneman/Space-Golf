@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import tools.Vector;
 
 public class Traject {
-	public static Vector muis_positie;
 	public static void Berekening(Bal golfbal, Planeet[] planeten) {
 		Vector F_tot = new Vector(0, 0);
 		for (Planeet planeet : planeten)
@@ -30,18 +29,17 @@ public class Traject {
 						MainFrame.WR * (golfbal.getSnelheid().getX() * Math.sin(2 * theta)
 								+ golfbal.getSnelheid().getY() * Math.cos(2 * theta))));
 				golfbal.Correctie(planeet);
+				break; // Bal kan alleen met 1 planeet botsen
 			}
-			break; // Bal kan alleen met 1 planeet botsen
 		}
 		golfbal.getPlaats().optelling(Vector.scalair_vermenigvuldiging(MainFrame.DeltaT, golfbal.getSnelheid()));
 	}
-	public void Aim(Graphics g, Bal golfbal, Planeet[] planeten){
+	public static void Aim(Graphics g, Bal golfbal, Planeet[] planeten,Vector muis_positie){
 		Bal virtuele_bal = golfbal.clone();
 		virtuele_bal.setSnelheid(virtuele_bal.InitialSpeed(muis_positie));
-		double afstand = Vector.aftrekking(virtuele_bal.getPlaats(), golfbal.getPlaats()).modulus();
-		while(afstand<100){
+		for(int i = 0 ; i < MainFrame.AIM_TIME / MainFrame.DeltaT ; i++){
 			Berekening(virtuele_bal,planeten);
-			Cirkel punt = new Cirkel(virtuele_bal.getPlaats(), 1, 1, Color.WHITE);
+			Cirkel punt = new Cirkel(virtuele_bal.getPlaats(), 0, 1, Color.WHITE);
 			punt.paintme(g);
 		}	
 	}

@@ -1,7 +1,6 @@
 package spelelementen;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 import tools.PositionAverage;
 import tools.Vector;
@@ -20,7 +19,7 @@ public class Level {
 		getPlaneten()[0] = new Planeet(250, 350, 500, 35, Color.BLUE);
 		getPlaneten()[1] = new Planeet(100, 200, 1000, 80, Color.MAGENTA);
 		getPlaneten()[2] = new Planeet(400, 200, 1000, 65, Color.GREEN);
-		hole = new Hole(getPlaneten()[0],Math.PI, 10);
+		hole = new Hole(getPlaneten()[0], (Math.PI * 3) / -2, 10);
 	}
 
 	public void ResetBall() {
@@ -44,7 +43,7 @@ public class Level {
 				}
 			}
 		}
-		if(hole.Score(golfbal)){
+		if (hole.Score(golfbal)) {
 			System.out.println("Score!!!!!!!");
 		}
 	}
@@ -56,7 +55,8 @@ public class Level {
 	public Planeet[] getPlaneten() {
 		return planeten;
 	}
-	public Hole getHole(){
+
+	public Hole getHole() {
 		return hole;
 	}
 }

@@ -19,6 +19,7 @@ import tools.Vector;
 public class MainPanel extends JPanel implements MouseListener, KeyListener, ActionListener, MouseMotionListener {
 	private final Level level;
 	private Timer timer;
+	private Vector muis_positie = new Vector(0,0);
 
 	public MainPanel(Level level) {
 		this.level = level;
@@ -27,6 +28,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		addMouseListener(this);
 		addKeyListener(this);
 		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
 
 	public void paint(Graphics g) {
@@ -36,19 +38,32 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		}
 		level.getGolfbal().paintme(g);
 		level.getHole().paintme(g);
+		if (level.getGolfbal().isStationary())
+			Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie);
 	}
 
 	public Level getLevel() {
 		return level;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (!level.getGolfbal().isStationary()) {
+			level.turn();
+			repaint();
+		} else {
+			timer.stop();
+			System.out.println("Next Turn");
+		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Bal b = level.getGolfbal();
 		if (b.isStationary()) {
-			b.setSnelheid(b.InitialSpeed(new Vector(e.getX(),e.getY())));
+			b.setSnelheid(b.InitialSpeed(muis_positie));
 			b.setStationary(false);
-			timer = new Timer((int)(MainFrame.DeltaT * 1000), this);
+			timer = new Timer((int) (MainFrame.DeltaT * 1000), this);
 			timer.start();
 			System.out.println("GO");
 		}
@@ -63,11 +78,12 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 			break;
 		}
 	}
-	
+
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		Traject.muis_positie = new Vector(e.getX(),e.getY());
-		
+		muis_positie = new Vector(e.getX(), e.getY());
+		repaint();
+
 	}
 
 	@Override
@@ -106,21 +122,9 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (!level.getGolfbal().isStationary()) {
-			level.turn();
-			repaint();
-		} else {
-			timer.stop();
-			System.out.println("Next Turn");
-		}
-	}
-
-	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 }
