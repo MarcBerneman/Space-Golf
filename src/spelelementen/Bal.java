@@ -32,5 +32,10 @@ public class Bal extends Cirkel {
 		setPlaats(Vector.optelling(ColidingPlanet.getPlaats(), n));
 		// Beweegt de bal zodat het niet in de planeet is
 	}
+	
+	public Vector InitialSpeed(Vector MousePosition) {
+		Vector snelheid = Vector.aftrekking(MousePosition, getPlaats());
+		return Vector.scalair_vermenigvuldiging(MainFrame.MOUSE_SPEED_COEFFICIENT, snelheid);
+	}
 
 }
