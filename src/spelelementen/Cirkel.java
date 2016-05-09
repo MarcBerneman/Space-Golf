@@ -49,5 +49,9 @@ public class Cirkel {
 	public int getStraal() {
 		return straal;
 	}
+	
+	public Color getKleur(){
+		return kleur;
+	}
 
 }

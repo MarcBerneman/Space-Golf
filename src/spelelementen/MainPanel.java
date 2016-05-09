@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -15,7 +16,7 @@ import javax.swing.Timer;
 import tools.Vector;
 
 @SuppressWarnings("serial")
-public class MainPanel extends JPanel implements MouseListener, KeyListener, ActionListener {
+public class MainPanel extends JPanel implements MouseListener, KeyListener, ActionListener, MouseMotionListener {
 	private final Level level;
 	private Timer timer;
 
@@ -25,6 +26,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		setFocusable(true);
 		addMouseListener(this);
 		addKeyListener(this);
+		addMouseListener(this);
 	}
 
 	public void paint(Graphics g) {
@@ -61,6 +63,12 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 			repaint();
 			break;
 		}
+	}
+	
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+		
 	}
 
 	@Override
@@ -108,5 +116,12 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 			System.out.println("Next Turn");
 		}
 	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

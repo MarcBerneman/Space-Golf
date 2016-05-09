@@ -37,5 +37,12 @@ public class Bal extends Cirkel {
 		Vector snelheid = Vector.aftrekking(MousePosition, getPlaats());
 		return Vector.scalair_vermenigvuldiging(MainFrame.MOUSE_SPEED_COEFFICIENT, snelheid);
 	}
+	
+	public Bal clone() {
+		Bal dolly = new Bal(getPlaats().clone(),getMassa(),getStraal(),getKleur());
+		dolly.setSnelheid(this.getSnelheid());
+		dolly.isStationary = this.isStationary;
+		return dolly;
+	}
 
 }
