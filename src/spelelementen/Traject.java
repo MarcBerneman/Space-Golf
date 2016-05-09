@@ -4,7 +4,7 @@ import tools.Vector;
 
 public class Traject {
 	public Vector Berekening(Bal golfbal, Planeet[] planeten) {
-		if (!golfbal.isStationary) {
+		if (!golfbal.isStationary()) {
 			Vector F_tot = new Vector(0, 0);
 			for (Planeet planeet : planeten)
 				F_tot = Vector.optelling(F_tot, planeet.zwaartekrachtveld(golfbal.getPlaats()));

@@ -23,12 +23,12 @@ public class Level {
 	}
 
 	public void ResetBall() {
-		getGolfbal().isStationary = true;
+		getGolfbal().setStationary(true);
 		getGolfbal().setPlaats(startPos.clone());
 	}
 
 	public void turn() {
-		if (!getGolfbal().isStationary) {
+		if (!getGolfbal().isStationary()) {
 			Vector F_tot = new Vector(0, 0);
 			for (Planeet planeet : getPlaneten())
 				F_tot = Vector.optelling(F_tot, planeet.zwaartekrachtveld(getGolfbal().getPlaats()));
@@ -54,7 +54,7 @@ public class Level {
 					positionaverage.add(getGolfbal().getPlaats());
 					if (positionaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
 						// Bal mag alleen stoppen op planeet
-						getGolfbal().isStationary = true;
+						getGolfbal().setStationary(true);
 						positionaverage.initialize();
 						// Voorbereiding op volgend schot
 					}

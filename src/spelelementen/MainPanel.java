@@ -45,10 +45,9 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Bal b = level.getGolfbal();
-		if (b.isStationary) {
+		if (b.isStationary()) {
 			b.setSnelheid(b.InitialSpeed(new Vector(e.getX(),e.getY())));
-			b.isStationary = false;
-			//timer.schedule(new BalBewegingTask(this), 0, (long) (MainFrame.DeltaT * 1000));
+			b.setStationary(false);
 			timer = new Timer((int)(MainFrame.DeltaT * 1000), this);
 			timer.start();
 			System.out.println("GO");
@@ -108,7 +107,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (!level.getGolfbal().isStationary) {
+		if (!level.getGolfbal().isStationary()) {
 			level.turn();
 			repaint();
 		} else {
