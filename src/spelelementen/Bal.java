@@ -26,7 +26,7 @@ public class Bal extends Cirkel {
 		this.snelheid = snelheid;
 	}
 
-	public void Correctie(Planeet ColidingPlanet) {
+	public void Correctie(Cirkel ColidingPlanet) {
 		Vector n = Vector.aftrekking(getPlaats(), ColidingPlanet.getPlaats());
 		n.scalair_vermenigvuldiging((this.getStraal() + ColidingPlanet.getStraal()) / n.modulus());
 		setPlaats(Vector.optelling(ColidingPlanet.getPlaats(), n));
