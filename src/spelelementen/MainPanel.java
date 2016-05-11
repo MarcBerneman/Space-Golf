@@ -20,8 +20,8 @@ import tools.Vector;
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel implements MouseListener, KeyListener, ActionListener, MouseMotionListener {
 	private final Level level;
-	private Timer timer;
-	private Vector muis_positie = new Vector(0,0);
+	private Timer timer = new Timer((int) (MainFrame.DeltaT * 1000), this);
+	private Vector muis_positie = new Vector(0, 0);
 	final static String IMAGE_FOLDER = "images/";
 	private Image[] afbeeldingen;
 	private Image Background;
@@ -39,44 +39,40 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		afbeeldingen[1] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "mawran.png")).getImage();
 		afbeeldingen[2] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "latest.png")).getImage();
 		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
+		timer.start();
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.drawImage(Background, 0, 0,getWidth(),getHeight(), this);
+		g.drawImage(Background, 0, 0, getWidth(), getHeight(), this);
 		for (Planeet planeet : level.getPlaneten()) {
 			planeet.paintme(g);
 		}
-		for (int i=0;i<3;i++){
-			int uitwijking = level.getPlaneten()[i].getStraal()+5;
-			int x = (int) level.getPlaneten()[i].getPlaats().getX()-uitwijking;
-			int y = (int) level.getPlaneten()[i].getPlaats().getY()-uitwijking;
-			g.drawImage(afbeeldingen[i], x, y, 2*uitwijking, 2*uitwijking, this);
+		for (int i = 0; i < 3; i++) {
+			int uitwijking = level.getPlaneten()[i].getStraal() + 5;
+			int x = (int) level.getPlaneten()[i].getPlaats().getX() - uitwijking;
+			int y = (int) level.getPlaneten()[i].getPlaats().getY() - uitwijking;
+			g.drawImage(afbeeldingen[i], x, y, 2 * uitwijking, 2 * uitwijking, this);
 		}
 		level.getGolfbal().paintme(g);
 		level.getHole().paintme(g);
-		for(Satelliet satelliet : level.getSatellieten()){
+		for (Satelliet satelliet : level.getSatellieten()) {
 			satelliet.paintme(g);
 		}
-		if (level.getGolfbal().isStationary()){
+		if (level.getGolfbal().isStationary()) {
 			Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
 		}
-		
+
 	}
 
 	public Level getLevel() {
 		return level;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (!level.getGolfbal().isStationary()) {
-			level.turn();
-			repaint();
-		} else {
-			timer.stop();
-			System.out.println("Next Turn");
-		}
+		level.turn();
+		repaint();
 	}
 
 	@Override
@@ -85,8 +81,6 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		if (b.isStationary()) {
 			b.setSnelheid(b.InitialSpeed(muis_positie));
 			b.setStationary(false);
-			timer = new Timer((int) (MainFrame.DeltaT * 1000), this);
-			timer.start();
 			System.out.println("GO");
 		}
 	}
@@ -96,7 +90,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_R:
 			level.ResetBall();
-//satellieten ook terug op startpositie?
+			// satellieten ook terug op startpositie?
 			repaint();
 			break;
 		}
