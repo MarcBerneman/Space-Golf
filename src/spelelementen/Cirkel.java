@@ -9,12 +9,14 @@ public class Cirkel {
 	private Vector plaats;
 	private final int massa, straal;
 	private final Color kleur;
+	private Vector snelheid;
 
 	public Cirkel(Vector plaats, int massa, int straal, Color kleur) {
 		this.plaats = plaats;
 		this.massa = massa;
 		this.straal = straal;
 		this.kleur = kleur;
+		this.snelheid = new Vector(0,0);
 	}
 
 	public Cirkel(int x, int y, int massa, int straal, Color kleur) {
@@ -22,8 +24,24 @@ public class Cirkel {
 		this.massa = massa;
 		this.straal = straal;
 		this.kleur = kleur;
+		this.snelheid = new Vector(0,0);
 	}
-
+	
+	public Cirkel(Vector plaats, int massa, int straal, Color kleur, Vector snelheid){
+		this.plaats = plaats;
+		this.massa = massa;
+		this.straal = straal;
+		this.kleur = kleur;
+		this.snelheid = snelheid;
+	}
+	public Cirkel(int x, int y, int massa, int straal, Color kleur, Vector snelheid) {
+		this.plaats = new Vector((double) x, (double) y);
+		this.massa = massa;
+		this.straal = straal;
+		this.kleur = kleur;
+		this.snelheid = snelheid;
+	}
+	
 	public boolean isColiding(Cirkel other) {
 		Vector this_to_other = Vector.aftrekking(this.plaats, other.plaats);
 		return this_to_other.modulus() < this.straal + other.straal;
@@ -53,5 +71,10 @@ public class Cirkel {
 	public Color getKleur(){
 		return kleur;
 	}
-
+	public Vector getSnelheid(){
+		return snelheid;
+	}
+	public void setSnelheid(Vector snelheid) {
+		this.snelheid = snelheid;
+	}
 }

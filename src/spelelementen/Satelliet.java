@@ -26,7 +26,12 @@ public class Satelliet extends Cirkel {
 	public double getHoeksnelheid(){
 		return hoeksnelheid;
 	}
-	public double getAfstand_tot_planeet(){
+	public Vector getSnelheid(){
+		Vector snelheidsvector = new Vector(-omwentelingstraal*hoeksnelheid*Math.sin(hoeksnelheid*MainFrame.DeltaT),omwentelingstraal*hoeksnelheid*Math.cos(hoeksnelheid*MainFrame.DeltaT));
+		return snelheidsvector;
+	}
+	
+	public double getOmwentelingstraal(){
 		return omwentelingstraal;
 	}
 	public Planeet getPlaneet(){

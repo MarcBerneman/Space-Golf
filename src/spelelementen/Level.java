@@ -13,42 +13,46 @@ public class Level {
 	private final Hole hole;
 	private final Satelliet[] satellieten;
 	private final Cirkel[] hemellichamen;
+	private int nr_strokes = 0;
+	private final int par = 3;
+	
 	
 	public Level() {
 		startPos = new Vector(250, 150);
 		golfbal = new Bal(startPos.clone(), 1, 10, Color.WHITE);
-		planeten = new Planeet[3];
-		getPlaneten()[0] = new Planeet(250, 350, 500, 35, Color.BLUE);
-		getPlaneten()[1] = new Planeet(100, 200, 1000, 80, Color.MAGENTA);
-		getPlaneten()[2] = new Planeet(400, 200, 1000, 65, Color.GREEN);
+		planeten = new Planeet[4];
+		planeten[0] = new Planeet(700, 500, 500, 35, Color.BLUE);
+		planeten[1] = new Planeet(100, 200, 1000, 80, Color.MAGENTA);
+		planeten[2] = new Planeet(400, 200, 1000, 65, Color.GREEN);
+		planeten[3] = new Planeet(500, 400, 2000, 65, Color.PINK);
 		satellieten = new Satelliet[1];//in vervolg if voor als er wel of geen satellieten zijn
-		getSatellieten()[0] = new Satelliet(2, getPlaneten()[2], 50, Color.CYAN, Math.PI);
+		getSatellieten()[0] = new Satelliet(2, planeten[2], 50, Color.CYAN, Math.PI);
 		hemellichamen  = new Cirkel[planeten.length+satellieten.length];
 		for(int i=0;i<hemellichamen.length;i++){
 			if(i<planeten.length){
-				getHemellichamen()[i] = getPlaneten()[i];
+				hemellichamen[i] = planeten[i];
 			}
 			else{
-				getHemellichamen()[i] = getSatellieten()[i-planeten.length];
+				hemellichamen[i] = getSatellieten()[i-planeten.length];
 			}
 		}
-		hole = new Hole(getPlaneten()[0], (Math.PI * 3) / -2, 10);
+		hole = new Hole(planeten[0], (Math.PI * 3) / -2, 20);
 	}
 
 	public void ResetBall() {
-		getGolfbal().setStationary(true);
-		getGolfbal().setPlaats(startPos.clone());
+		golfbal.setStationary(true);
+		golfbal.setPlaats(startPos.clone());
 	}
 
 	public void turn() {
-		if (!getGolfbal().isStationary()) {
+		if (!golfbal.isStationary()) {
 			Traject.Berekening(golfbal, planeten, hemellichamen);
-			for (Planeet planeet : getPlaneten()) {
-				if (getGolfbal().isColiding(planeet)) {
-					positionaverage.add(getGolfbal().getPlaats());
+			for (Planeet planeet : planeten) {
+				if (golfbal.isColiding(planeet)) {
+					positionaverage.add(golfbal.getPlaats());
 					if (positionaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
 						// Bal mag alleen stoppen op planeet
-						getGolfbal().setStationary(true);
+						golfbal.setStationary(true);
 						positionaverage.initialize();
 						// Voorbereiding op volgend schot
 					}
@@ -82,4 +86,17 @@ public class Level {
 	public Cirkel[] getHemellichamen(){
 		return hemellichamen;
 	}
+
+	public int getNr_strokes() {
+		return nr_strokes;
+	}
+
+	public void setNr_strokes(int nr_strokes) {
+		this.nr_strokes = nr_strokes;
+	}
+
+	public int getPar() {
+		return par;
+	}
+
 }

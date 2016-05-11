@@ -1,0 +1,5 @@
+aantal planeten, (int x), (int y), (int massa), (int straal), (Color kleur)
+aantal satellieten, (double hoeksnelheid), (Planeet planeet), (double afstand_tot_planeet), (Color kleur), (double beginhoek)
+Hole: Planeet planeet, double theta, int straal
+golfbal: Vector plaats, int massa, int straal, Color kleur
+Vector startpos

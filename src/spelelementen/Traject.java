@@ -23,12 +23,21 @@ public class Traject {
 					theta = Math.acos(bal_to_hemellichaam.getX() / bal_to_hemellichaam.modulus());
 				else
 					theta = 2 * Math.PI - Math.acos(bal_to_hemellichaam.getX() / bal_to_hemellichaam.modulus());
+//				Vector snelheid_door_hemellichaam = hemellichaam.getSnelheid();
+//				golfbal.setSnelheid(new Vector(
+//						MainFrame.COR * (-golfbal.getSnelheid().getX() * Math.cos(2 * theta)
+//								+ golfbal.getSnelheid().getY() * Math.sin(2 * theta)),
+//						MainFrame.WR * (golfbal.getSnelheid().getX() * Math.sin(2 * theta)
+//								+ golfbal.getSnelheid().getY() * Math.cos(2 * theta))));
+//				golfbal.setSnelheid(Vector.optelling(golfbal.getSnelheid(), snelheid_door_hemellichaam));
+				Vector relatieve_snelheid = Vector.aftrekking(golfbal.getSnelheid(),hemellichaam.getSnelheid());
 				golfbal.setSnelheid(new Vector(
-						MainFrame.COR * (-golfbal.getSnelheid().getX() * Math.cos(2 * theta)
-								+ golfbal.getSnelheid().getY() * Math.sin(2 * theta)),
-						MainFrame.WR * (golfbal.getSnelheid().getX() * Math.sin(2 * theta)
-								+ golfbal.getSnelheid().getY() * Math.cos(2 * theta))));
-				golfbal.Correctie(hemellichaam);
+						MainFrame.COR * (-relatieve_snelheid.getX() * Math.cos(2 * theta)
+								+ relatieve_snelheid.getY() * Math.sin(2 * theta)),
+						MainFrame.WR * (relatieve_snelheid.getX() * Math.sin(2 * theta)
+								+ relatieve_snelheid.getY() * Math.cos(2 * theta))));
+				golfbal.getSnelheid().aftrekking(hemellichaam.getSnelheid());
+				golfbal.Correctie(hemellichaam);	//Nathan: frontale botsing de satelliet does weird shit
 				break; // Bal kan alleen met 1 planeet botsen
 			}
 		}
