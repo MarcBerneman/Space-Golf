@@ -5,13 +5,16 @@ import java.awt.Color;
 import tools.Vector;
 
 public class Planeet extends Cirkel {
-
+	
 	public Planeet(Vector plaats, int massa, int straal, Color kleur) {
-		super(plaats, massa, straal, kleur);
+		super(plaats, massa, straal, kleur, new Vector(0,0));
 	}
 
 	public Planeet(int x, int y, int massa, int straal, Color kleur) {
-		super(x, y, massa, straal, kleur);
+		super(x, y, massa, straal, kleur, new Vector(0,0));
+	}
+	public Planeet(Vector plaats, int massa, int straal, Color kleur, Vector snelheid){
+		super(plaats, massa, straal, kleur, snelheid);
 	}
 
 	public Vector zwaartekrachtveld(Vector r) {

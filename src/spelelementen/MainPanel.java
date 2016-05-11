@@ -38,8 +38,13 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		}
 		level.getGolfbal().paintme(g);
 		level.getHole().paintme(g);
-		if (level.getGolfbal().isStationary())
-			Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie);
+		for(Satelliet satelliet : level.getSatellieten()){
+			satelliet.paintme(g);
+		}
+		if (level.getGolfbal().isStationary()){
+			Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
+		}
+		
 	}
 
 	public Level getLevel() {
@@ -74,6 +79,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_R:
 			level.ResetBall();
+//satellieten ook terug op startpositie?
 			repaint();
 			break;
 		}
