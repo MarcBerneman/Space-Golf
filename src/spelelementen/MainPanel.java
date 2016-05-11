@@ -9,7 +9,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -20,21 +22,36 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 	private final Level level;
 	private Timer timer;
 	private Vector muis_positie = new Vector(0,0);
+	final static String IMAGE_FOLDER = "images/";
+	private Image[] afbeeldingen;
+	private Image Background;
 
 	public MainPanel(Level level) {
 		this.level = level;
-		setBackground(Color.BLACK);
 		setFocusable(true);
 		addMouseListener(this);
 		addKeyListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		afbeeldingen = new Image[3];
+		setBackground(Color.BLACK);
+		afbeeldingen[0] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "planet.png")).getImage();
+		afbeeldingen[1] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "mawran.png")).getImage();
+		afbeeldingen[2] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "latest.png")).getImage();
+		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
+		g.drawImage(Background, 0, 0,getWidth(),getHeight(), this);
 		for (Planeet planeet : level.getPlaneten()) {
 			planeet.paintme(g);
+		}
+		for (int i=0;i<3;i++){
+			int uitwijking = level.getPlaneten()[i].getStraal()+5;
+			int x = (int) level.getPlaneten()[i].getPlaats().getX()-uitwijking;
+			int y = (int) level.getPlaneten()[i].getPlaats().getY()-uitwijking;
+			g.drawImage(afbeeldingen[i], x, y, 2*uitwijking, 2*uitwijking, this);
 		}
 		level.getGolfbal().paintme(g);
 		level.getHole().paintme(g);
