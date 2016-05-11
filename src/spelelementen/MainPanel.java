@@ -33,11 +33,11 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		addKeyListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		afbeeldingen = new Image[3];
+		afbeeldingen = new Image[level.getPlaneten().length];
 		setBackground(Color.BLACK);
-		afbeeldingen[0] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "planet.png")).getImage();
-		afbeeldingen[1] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "mawran.png")).getImage();
-		afbeeldingen[2] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "latest.png")).getImage();
+		for (int i = 0; i< level.getPlaneten().length; i++){
+			afbeeldingen[i] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + i+".png")).getImage();
+		}
 		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
 	}
 
@@ -47,8 +47,8 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		for (Planeet planeet : level.getPlaneten()) {
 			planeet.paintme(g);
 		}
-		for (int i=0;i<3;i++){
-			int uitwijking = level.getPlaneten()[i].getStraal()+5;
+		for (int i=0;i<level.getPlaneten().length;i++){
+			int uitwijking = level.getPlaneten()[i].getStraal();
 			int x = (int) level.getPlaneten()[i].getPlaats().getX()-uitwijking;
 			int y = (int) level.getPlaneten()[i].getPlaats().getY()-uitwijking;
 			g.drawImage(afbeeldingen[i], x, y, 2*uitwijking, 2*uitwijking, this);

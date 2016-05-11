@@ -13,11 +13,12 @@ public class MainFrame extends JFrame {
 	public final static double MINIMAL_AVERAGE_MOVEMENT = 1.5;
 	public final static double MAX_POWER = 400;
 	public final static double AIM_TIME = 1;
+	public final static int breedte= 1300, hoogte= 730;
 
 	public MainFrame() {
-		setSize(1366, 730);
+		setSize(breedte, hoogte);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(new MainPanel(new Level()));
+		add(new MainPanel(RandomLevel.GenerateRandomLevel()));
 		setVisible(true);
 	}
 
