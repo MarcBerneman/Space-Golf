@@ -48,19 +48,12 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		for (Planeet planeet : level.getPlaneten()) {
 			planeet.paintme(g);
 		}
-<<<<<<< HEAD
 		for (int i=0;i<level.getPlaneten().length;i++){
 			int uitwijking = level.getPlaneten()[i].getStraal();
 			int x = (int) level.getPlaneten()[i].getPlaats().getX()-uitwijking;
 			int y = (int) level.getPlaneten()[i].getPlaats().getY()-uitwijking;
 			g.drawImage(afbeeldingen[i], x, y, 2*uitwijking, 2*uitwijking, this);
-=======
-		for (int i = 0; i < 3; i++) {
-			int uitwijking = level.getPlaneten()[i].getStraal() + 5;
-			int x = (int) level.getPlaneten()[i].getPlaats().getX() - uitwijking;
-			int y = (int) level.getPlaneten()[i].getPlaats().getY() - uitwijking;
-			g.drawImage(afbeeldingen[i], x, y, 2 * uitwijking, 2 * uitwijking, this);
->>>>>>> 2ba86463586b6afb630431c96403b92aa486c653
+
 		}
 		level.getGolfbal().paintme(g);
 		level.getHole().paintme(g);

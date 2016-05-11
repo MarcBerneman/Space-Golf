@@ -13,7 +13,6 @@ public class Level {
 	private final Satelliet[] satellieten;
 	private final Cirkel[] hemellichamen;
 	private int nr_strokes = 0;
-<<<<<<< HEAD
 	private final int par=3;
 	private final Vector startPos;
 	
@@ -38,24 +37,7 @@ public class Level {
 		hemellichamen  = new Cirkel[planeten.length+satellieten.length];
 		for(int i=0;i<hemellichamen.length;i++){
 			if(i<planeten.length){
-=======
-	private final int par = 3;
 
-	public Level() {
-		startPos = new Vector(250, 150);
-		golfbal = new Bal(startPos.clone(), 1, 10, Color.WHITE);
-		planeten = new Planeet[4];
-		planeten[0] = new Planeet(700, 500, 500, 35, Color.BLUE);
-		planeten[1] = new Planeet(100, 200, 1000, 80, Color.MAGENTA);
-		planeten[2] = new Planeet(400, 200, 1000, 65, Color.GREEN);
-		planeten[3] = new Planeet(500, 400, 2000, 65, Color.PINK);
-		satellieten = new Satelliet[1];// in vervolg if voor als er wel of geen
-										// satellieten zijn
-		getSatellieten()[0] = new Satelliet(2, planeten[2], 50, Color.CYAN, Math.PI);
-		hemellichamen = new Cirkel[planeten.length + satellieten.length];
-		for (int i = 0; i < hemellichamen.length; i++) {
-			if (i < planeten.length) {
->>>>>>> 2ba86463586b6afb630431c96403b92aa486c653
 				hemellichamen[i] = planeten[i];
 			} else {
 				hemellichamen[i] = getSatellieten()[i - planeten.length];
