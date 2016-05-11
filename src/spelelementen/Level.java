@@ -13,6 +13,7 @@ public class Level {
 	private final Satelliet[] satellieten;
 	private final Cirkel[] hemellichamen;
 	private int nr_strokes = 0;
+<<<<<<< HEAD
 	private final int par=3;
 	private final Vector startPos;
 	
@@ -37,10 +38,27 @@ public class Level {
 		hemellichamen  = new Cirkel[planeten.length+satellieten.length];
 		for(int i=0;i<hemellichamen.length;i++){
 			if(i<planeten.length){
+=======
+	private final int par = 3;
+
+	public Level() {
+		startPos = new Vector(250, 150);
+		golfbal = new Bal(startPos.clone(), 1, 10, Color.WHITE);
+		planeten = new Planeet[4];
+		planeten[0] = new Planeet(700, 500, 500, 35, Color.BLUE);
+		planeten[1] = new Planeet(100, 200, 1000, 80, Color.MAGENTA);
+		planeten[2] = new Planeet(400, 200, 1000, 65, Color.GREEN);
+		planeten[3] = new Planeet(500, 400, 2000, 65, Color.PINK);
+		satellieten = new Satelliet[1];// in vervolg if voor als er wel of geen
+										// satellieten zijn
+		getSatellieten()[0] = new Satelliet(2, planeten[2], 50, Color.CYAN, Math.PI);
+		hemellichamen = new Cirkel[planeten.length + satellieten.length];
+		for (int i = 0; i < hemellichamen.length; i++) {
+			if (i < planeten.length) {
+>>>>>>> 2ba86463586b6afb630431c96403b92aa486c653
 				hemellichamen[i] = planeten[i];
-			}
-			else{
-				hemellichamen[i] = getSatellieten()[i-planeten.length];
+			} else {
+				hemellichamen[i] = getSatellieten()[i - planeten.length];
 			}
 		}
 //		hole = new Hole(planeten[0], (Math.PI * 3) / -2, 20);
@@ -54,26 +72,26 @@ public class Level {
 	public void turn() {
 		if (!golfbal.isStationary()) {
 			Traject.Berekening(golfbal, planeten, hemellichamen);
-			for (Planeet planeet : planeten) {
-				if (golfbal.isColiding(planeet)) {
-					positionaverage.add(golfbal.getPlaats());
-					if (positionaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
-						// Bal mag alleen stoppen op planeet
-						golfbal.setStationary(true);
-						positionaverage.initialize();
-						// Voorbereiding op volgend schot
-					}
-					break; // Bal kan alleen met 1 planeet botsen
+
+			if (golfbal.isCurrently_coliding()) {
+				positionaverage.add(golfbal.getPlaats());
+				if (positionaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
+					// Bal mag alleen stoppen op planeet
+					golfbal.setStationary(true);
+					positionaverage.initialize();
+					// Voorbereiding op volgend schot
 				}
+				golfbal.setCurrently_coliding(false);
 			}
+
 		}
-		for(Satelliet satelliet : satellieten){
+		for (Satelliet satelliet : satellieten) {
 			satelliet.move();
 		}
 		if (hole.Score(golfbal)) {
 			System.out.println("Score!!!!!!!");
 		}
-		
+
 	}
 
 	public Bal getGolfbal() {
@@ -87,10 +105,12 @@ public class Level {
 	public Hole getHole() {
 		return hole;
 	}
-	public Satelliet[] getSatellieten(){
+
+	public Satelliet[] getSatellieten() {
 		return satellieten;
 	}
-	public Cirkel[] getHemellichamen(){
+
+	public Cirkel[] getHemellichamen() {
 		return hemellichamen;
 	}
 
