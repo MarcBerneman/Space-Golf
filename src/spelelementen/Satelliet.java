@@ -14,6 +14,7 @@ public class Satelliet extends Cirkel {
 		this.omwentelingstraal = afstand_tot_planeet + planeet.getStraal();
 		this.hoeksnelheid = hoeksnelheid;
 		this.theta = beginhoek;
+		this.setSnelheid(snelheidberekening());
 	}
 	
 	public void move(){
@@ -21,14 +22,15 @@ public class Satelliet extends Cirkel {
 		Vector nieuwe_plaats = planeet.getPlaats().clone();
 		nieuwe_plaats.optelling(new Vector(omwentelingstraal*Math.cos(theta),omwentelingstraal*Math.sin(theta)));
 		this.setPlaats(nieuwe_plaats);
+		this.setSnelheid(snelheidberekening());
+	}
+	
+	private Vector snelheidberekening() {
+		return new Vector(-omwentelingstraal*hoeksnelheid*Math.sin(theta),omwentelingstraal*hoeksnelheid*Math.cos(theta));
 	}
 	
 	public double getHoeksnelheid(){
 		return hoeksnelheid;
-	}
-	public Vector getSnelheid(){
-		Vector snelheidsvector = new Vector(-omwentelingstraal*hoeksnelheid*Math.sin(hoeksnelheid*MainFrame.DeltaT),omwentelingstraal*hoeksnelheid*Math.cos(hoeksnelheid*MainFrame.DeltaT));
-		return snelheidsvector;
 	}
 	
 	public double getOmwentelingstraal(){
