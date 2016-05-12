@@ -9,7 +9,7 @@ public class RandomLevel {
 	
 	public static Level GenerateRandomLevel() {
 		Random rand = new Random();
-		int aantalplaneten= rand.nextInt(2)+8;
+		int aantalplaneten= rand.nextInt(2)+3;
 		Planeet[] planeten= new Planeet[aantalplaneten];
 		ArrayList<Planeet> planetenarray = new ArrayList<Planeet>();
 		while (planetenarray.size()<aantalplaneten){
