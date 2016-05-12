@@ -24,7 +24,7 @@ public class Traject {
 					theta = Math.acos(bal_to_hemellichaam.getX() / bal_to_hemellichaam.modulus());
 				else
 					theta = 2 * Math.PI - Math.acos(bal_to_hemellichaam.getX() / bal_to_hemellichaam.modulus());
-				Vector relatieve_snelheid = Vector.optelling(golfbal.getSnelheid(),hemellichaam.getSnelheid());
+				Vector relatieve_snelheid = Vector.aftrekking(golfbal.getSnelheid(),hemellichaam.getSnelheid());
 				golfbal.setSnelheid(new Vector(
 						MainFrame.COR * (-relatieve_snelheid.getX() * Math.cos(2 * theta)
 								+ relatieve_snelheid.getY() * Math.sin(2 * theta)),
