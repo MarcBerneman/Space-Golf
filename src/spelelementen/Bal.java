@@ -9,11 +9,7 @@ public class Bal extends Cirkel {
 	private boolean currently_coliding = false;
 
 	public Bal(Vector plaats, int massa, int straal, Color kleur) {
-		super(plaats, massa, straal, kleur);
-	}
-
-	public Bal(Vector plaats, int massa, int straal, Color kleur, Vector snelheid) {
-		super(plaats, massa, straal, kleur);
+		super(plaats.clone(), massa, straal, kleur);
 	}
 
 	public void Correctie(Cirkel ColidingPlanet) {
