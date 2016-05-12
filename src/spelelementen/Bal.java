@@ -36,6 +36,13 @@ public class Bal extends Cirkel {
 		dolly.setStationary(this.isStationary());
 		return dolly;
 	}
+	
+	public boolean outOfBounds(int breedte,int hoogte) {
+		double x = getPlaats().getX();
+		double y = getPlaats().getY();
+		int r = getStraal();
+		return (((x+r)<0) || ((y+r)<0) || ((x-r)>breedte) || ((y-r)>hoogte));
+	}
 
 	public boolean isStationary() {
 		return stationary;
