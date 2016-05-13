@@ -1,7 +1,5 @@
 package spelelementen;
 
-import java.awt.Color;
-
 import tools.PositionAverage;
 import tools.Vector;
 
@@ -13,20 +11,19 @@ public class Level {
 	private final Satelliet[] satellieten;
 	private final Cirkel[] hemellichamen;
 	private int nr_strokes = 0;
-	private final int par=3;
+	private final int par = 3;
 	private final Vector startPos;
-	
-	
+
 	public Level(Planeet[] planeten, Satelliet[] satellieten, Bal golfbal, Hole hole, Vector startPos) {
-		this.planeten= planeten;
-		this.satellieten =satellieten;
-		this.golfbal= golfbal;
-		this.hole= hole;
-		this.startPos= startPos;
-		
-		hemellichamen  = new Cirkel[planeten.length+satellieten.length];
-		for(int i=0;i<hemellichamen.length;i++){
-			if(i<planeten.length){
+		this.planeten = planeten;
+		this.satellieten = satellieten;
+		this.golfbal = golfbal;
+		this.hole = hole;
+		this.startPos = startPos;
+
+		hemellichamen = new Cirkel[planeten.length + satellieten.length];
+		for (int i = 0; i < hemellichamen.length; i++) {
+			if (i < planeten.length) {
 
 				hemellichamen[i] = planeten[i];
 			} else {
