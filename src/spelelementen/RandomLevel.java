@@ -43,11 +43,12 @@ public class RandomLevel {
 			}else{
 				reserveerde_straal = (int) (RESERVED*planeet.getStraal());
 			}
+			Cirkel maanplaneet = new Cirkel(x,y,0,reserveerde_straal,Color.WHITE);
 			
 			boolean checkcoliding = true;
 
 			for (Cirkel ruimte : reserveerde_ruimtes) {
-				if (planeet.isColiding(ruimte)) {
+				if (maanplaneet.isColiding(ruimte)) {
 					checkcoliding = false;
 				}
 			}
