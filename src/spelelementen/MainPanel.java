@@ -63,9 +63,9 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		if (level.getGolfbal().isStationary()) {
 			Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
 		}
-		if (level.getGolfbal().outOfBounds(MainFrame.breedte,MainFrame.hoogte)){
-			OutOfBoundsBox.drawBox(g,level.getGolfbal(),MainFrame.breedte, MainFrame.hoogte);
-			OutOfBoundsBox.drawString(g,level.getGolfbal(),MainFrame.breedte, MainFrame.hoogte);
+		if (level.getGolfbal().outOfBounds(MainFrame.BREEDTE,MainFrame.HOOGTE)){
+			OutOfBoundsBox.drawBox(g,level.getGolfbal(),MainFrame.BREEDTE, MainFrame.HOOGTE);
+			OutOfBoundsBox.drawString(g,level.getGolfbal(),MainFrame.BREEDTE, MainFrame.HOOGTE);
 		}
 
 	}
