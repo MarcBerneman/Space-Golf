@@ -8,8 +8,8 @@ public class Satelliet extends Cirkel {
 	private double theta,hoeksnelheid, omwentelingstraal;
 	private Planeet planeet;
 		
-	public Satelliet(double hoeksnelheid, Planeet planeet, double afstand_tot_planeet, Color kleur, double beginhoek) {
-		super(new Vector((afstand_tot_planeet + planeet.getStraal())*Math.cos(beginhoek),(afstand_tot_planeet + planeet.getStraal())*Math.sin(beginhoek)), 0, 20, kleur);
+	public Satelliet(double hoeksnelheid, Planeet planeet, double afstand_tot_planeet, Color kleur, double beginhoek,int straal) {
+		super(new Vector((afstand_tot_planeet + planeet.getStraal())*Math.cos(beginhoek),(afstand_tot_planeet + planeet.getStraal())*Math.sin(beginhoek)), 0, straal, kleur);
 		this.planeet = planeet;
 		this.omwentelingstraal = afstand_tot_planeet + planeet.getStraal();
 		this.hoeksnelheid = hoeksnelheid;

@@ -20,10 +20,10 @@ public class OutOfBoundsBox {
 		double y;
 		double rico = (bal.getPlaats().getY()-midden.getY())/(bal.getPlaats().getX()-midden.getX());
 		if (theta>=2*Math.PI-phi){
-			x = breedte-50;
+			x = breedte;
 			y = rico*(x - midden.getX())+midden.getY();
 		}else if (theta>=Math.PI+phi){
-			y = hoogte-70;
+			y = hoogte;
 			x = (1/rico)*(y - midden.getY())+midden.getX();
 		}else if (theta>=Math.PI-phi){
 			x = 0;
@@ -32,7 +32,7 @@ public class OutOfBoundsBox {
 			y = 0;
 			x = (1/rico)*(y - midden.getY())+midden.getX();
 		}else{
-			x = breedte-50;
+			x = breedte;
 			y = rico*(x - midden.getX())+midden.getY();
 		}
 		return new Vector(x,y);
@@ -48,8 +48,8 @@ public class OutOfBoundsBox {
 		g.setColor(Color.WHITE);
 		int distance = (int) distance(bal, breedte, hoogte);
 		String distancestring = Integer.toString(distance);
-		if (Integer.toString(distance).length()>4){
-			distancestring = "infinite";
+		if (distance > 9000){
+			distancestring = ">9000";
 		}
 		g.drawString(distancestring, (int) box.getX()+2, (int) box.getY()+18);
 	}
@@ -57,7 +57,7 @@ public class OutOfBoundsBox {
 	public static void drawBox(Graphics g,Bal bal,int breedte, int hoogte) {
 		Vector box = box_plaats(bal, breedte,hoogte);
 		g.setColor(Color.WHITE);
-		g.drawRect((int) box.getX(), (int) box.getY(), 30,30 );
+		g.drawRect((int) box.getX(), (int) box.getY(), 40,30 );
 	}
 	
 }
