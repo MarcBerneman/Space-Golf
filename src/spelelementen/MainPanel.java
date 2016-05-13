@@ -1,6 +1,7 @@
 package spelelementen;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 
 	public MainPanel(Level level) {
 		this.level = level;
+		setPreferredSize(new Dimension(MainFrame.BREEDTE,MainFrame.HOOGTE));
 		setFocusable(true);
 		addMouseListener(this);
 		addKeyListener(this);
@@ -65,7 +67,6 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		}
 		if (level.getGolfbal().outOfBounds(MainFrame.BREEDTE,MainFrame.HOOGTE)){
 			OutOfBoundsBox.drawBox(g,level.getGolfbal(),MainFrame.BREEDTE, MainFrame.HOOGTE);
-			OutOfBoundsBox.drawString(g,level.getGolfbal(),MainFrame.BREEDTE, MainFrame.HOOGTE);
 		}
 
 	}

@@ -16,9 +16,9 @@ public class MainFrame extends JFrame {
 	public final static int BREEDTE= 1300, HOOGTE= 730;
 
 	public MainFrame() {
-		setSize(BREEDTE, HOOGTE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(new MainPanel(RandomLevel.GenerateRandomLevel()));
+		pack();
 		setVisible(true);
 	}
 
