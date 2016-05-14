@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 import tools.Vector;
 
 public class OutOfBoundsBox {
-	private static int BOXHOOGTE = 30, BOXBREEDTE = 46;
+	private final static int BOXHOOGTE = 30, BOXBREEDTE = 46;
 
 	public static Vector box_plaats(Bal bal, int breedte, int hoogte) {
 		Vector midden = new Vector(breedte / 2, hoogte / 2);

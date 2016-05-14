@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import tools.Vector;
+import spelelementen.OutOfBoundsBox;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel implements MouseListener, KeyListener, ActionListener, MouseMotionListener {

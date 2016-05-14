@@ -7,13 +7,16 @@ import java.util.Random;
 import tools.Vector;
 
 public class RandomLevel {
-	private static double RESERVED = 1.5;
-	private static double DICHTHEID = 0.75;
+	private final static double RESERVED = 1.5;
+	private final static double DICHTHEID = 0.75;
 
 	public static Level GenerateRandomLevel() {
 		Random rand = new Random();
 		int aantalplaneten = rand.nextInt(3) + 3;
-		int aantalsatellieten = rand.nextInt(2) + 2;
+		int aantalsatellieten = rand.nextInt(2) + 1;
+		if(aantalsatellieten > aantalplaneten)
+			aantalsatellieten = rand.nextInt(2) + 1;
+		int aantal_loops = 0;
 		Planeet[] planeten = new Planeet[aantalplaneten];
 		Satelliet[] satellieten = new Satelliet[aantalsatellieten];
 		ArrayList<Cirkel> reserveerde_ruimtes = new ArrayList<Cirkel>(aantalplaneten);
@@ -59,6 +62,15 @@ public class RandomLevel {
 				nr_initialized_planets++;
 				reserveerde_ruimtes.add(bezetgebied);
 			}
+			if(aantal_loops > 2000) {
+				aantal_loops = 0;
+				planeten = new Planeet[aantalplaneten];
+				satellieten = new Satelliet[aantalsatellieten];
+				reserveerde_ruimtes = new ArrayList<Cirkel>(aantalplaneten);
+				nr_initialized_planets = 0;
+				nr_initialized_satelites = 0;
+			}
+			aantal_loops++;
 		}
 		// heeft een lijst aangemaakt van 4 of 5 planeten die elkaar niet raken en ergens op het scherm staan met
 		// een random straal tussen 30 en 100 en een massa die afhankelijk is van die straal
