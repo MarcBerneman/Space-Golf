@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import gui_componenten.GameMain;
 import tools.Vector;
 
 public class RandomLevel {
@@ -28,8 +29,8 @@ public class RandomLevel {
 		while (nr_initialized_planets < aantalplaneten) {
 			int straal = rand.nextInt(71) + 50;
 			int massa = (int) (DICHTHEID * straal * straal);
-			int x = rand.nextInt(MainFrame.BREEDTE - straal * 2) + straal; // kan een positie nemen in de breedte van het scherm zonder de straal
-			int y = rand.nextInt(MainFrame.HOOGTE - straal * 2) + straal; // hetzelfde maar voor de breedte
+			int x = rand.nextInt(GameMain.BREEDTE - straal * 2) + straal; // kan een positie nemen in de breedte van het scherm zonder de straal
+			int y = rand.nextInt(GameMain.HOOGTE - straal * 2) + straal; // hetzelfde maar voor de breedte
 			Planeet planeet = new Planeet(x, y, massa, straal, Color.BLACK);
 			int reserveerde_straal;
 			if (contains(indexen_van_planeten_met_satelliet, nr_initialized_planets)) {
@@ -79,7 +80,7 @@ public class RandomLevel {
 		// maakt een hole op een wilekeurige planeet
 		Vector startPos = new Vector(5, 5);
 		Bal golfbal = new Bal(startPos, 1, 10, Color.WHITE);
-		return new Level(planeten, satellieten, golfbal, hole, startPos);
+		return new Level(planeten, satellieten, golfbal, hole, startPos,0);
 
 	}
 

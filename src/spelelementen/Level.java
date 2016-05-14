@@ -1,5 +1,6 @@
 package spelelementen;
 
+import gui_componenten.GameMain;
 import tools.PositionAverage;
 import tools.Vector;
 
@@ -11,15 +12,16 @@ public class Level {
 	private final Satelliet[] satellieten;
 	private final Cirkel[] hemellichamen;
 	private int nr_strokes = 0;
-	private final int par = 3;
+	private final int par;
 	private final Vector startPos;
 
-	public Level(Planeet[] planeten, Satelliet[] satellieten, Bal golfbal, Hole hole, Vector startPos) {
+	public Level(Planeet[] planeten, Satelliet[] satellieten, Bal golfbal, Hole hole, Vector startPos, int par) {
 		this.planeten = planeten;
 		this.satellieten = satellieten;
 		this.golfbal = golfbal;
 		this.hole = hole;
 		this.startPos = startPos;
+		this.par = par;
 
 		hemellichamen = new Cirkel[planeten.length + satellieten.length];
 		for (int i = 0; i < hemellichamen.length; i++) {
@@ -33,8 +35,11 @@ public class Level {
 	}
 
 	public void ResetBall() {
-		golfbal.setStationary(true);
-		golfbal.setPlaats(startPos.clone());
+		if(!golfbal.getPlaats().equals(startPos)) {
+			golfbal.setStationary(true);
+			golfbal.setPlaats(startPos.clone());
+			incrementStrokes();
+		}
 	}
 
 	public void turn() {
@@ -43,7 +48,7 @@ public class Level {
 
 			if (golfbal.isCurrently_coliding()) {
 				positionaverage.add(golfbal.getPlaats());
-				if (positionaverage.average() < MainFrame.MINIMAL_AVERAGE_MOVEMENT) {
+				if (positionaverage.average() < GameMain.MINIMAL_AVERAGE_MOVEMENT) {
 					// Bal mag alleen stoppen op planeet
 					golfbal.setStationary(true);
 					positionaverage.initialize();
@@ -88,6 +93,10 @@ public class Level {
 
 	public void setNr_strokes(int nr_strokes) {
 		this.nr_strokes = nr_strokes;
+	}
+	
+	public void incrementStrokes() {
+		nr_strokes++;
 	}
 
 	public int getPar() {

@@ -1,4 +1,4 @@
-package spelelementen;
+package gui_componenten;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,23 +14,31 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 import tools.Vector;
+import spelelementen.Bal;
+import spelelementen.Level;
 import spelelementen.OutOfBoundsBox;
+import spelelementen.Planeet;
+import spelelementen.Satelliet;
+import spelelementen.Traject;
 
 @SuppressWarnings("serial")
-public class MainPanel extends JPanel implements MouseListener, KeyListener, ActionListener, MouseMotionListener {
+public class LevelPanel extends JPanel implements MouseListener, KeyListener, ActionListener, MouseMotionListener {
 	private final Level level;
-	private Timer timer = new Timer((int) (MainFrame.DeltaT * 1000), this);
+	private Timer timer = new Timer((int) (GameMain.DeltaT * 1000), this);
 	private Vector muis_positie = new Vector(0, 0);
 	final static String IMAGE_FOLDER = "images/";
 	private Image[] afbeeldingen;
 	private Image Background;
-
-	public MainPanel(Level level) {
+	
+	public final JTextArea information = new JTextArea(1,1);
+	
+	public LevelPanel(Level level) {
 		this.level = level;
-		setPreferredSize(new Dimension(MainFrame.BREEDTE,MainFrame.HOOGTE));
+		setPreferredSize(new Dimension(GameMain.BREEDTE,GameMain.HOOGTE));
 		setFocusable(true);
 		addMouseListener(this);
 		addKeyListener(this);
@@ -66,8 +74,8 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		if (level.getGolfbal().isStationary()) {
 			Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
 		}
-		if (level.getGolfbal().outOfBounds(MainFrame.BREEDTE,MainFrame.HOOGTE)){
-			OutOfBoundsBox.drawBox(g,level.getGolfbal(),MainFrame.BREEDTE, MainFrame.HOOGTE);
+		if (level.getGolfbal().outOfBounds(GameMain.BREEDTE,GameMain.HOOGTE)){
+			OutOfBoundsBox.drawBox(g,level.getGolfbal(),GameMain.BREEDTE, GameMain.HOOGTE);
 		}
 
 	}
@@ -80,6 +88,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 	public void actionPerformed(ActionEvent e) {
 		level.turn();
 		repaint();
+		information.setText("Strokes: " + level.getNr_strokes() + ", Par: " + (level.getPar() > 0 ? level.getPar() : "N/A"));
 	}
 
 	@Override
@@ -88,7 +97,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		if (b.isStationary()) {
 			b.setSnelheid(b.InitialSpeed(muis_positie));
 			b.setStationary(false);
-			System.out.println("GO");
+			level.incrementStrokes();
 		}
 	}
 
@@ -97,7 +106,6 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener, Act
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_R:
 			level.ResetBall();
-			// satellieten ook terug op startpositie?
 			repaint();
 			break;
 		}

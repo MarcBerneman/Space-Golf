@@ -2,6 +2,7 @@ package spelelementen;
 
 import java.awt.Color;
 
+import gui_componenten.GameMain;
 import tools.Vector;
 
 public class Bal extends Cirkel {
@@ -21,9 +22,9 @@ public class Bal extends Cirkel {
 
 	public Vector InitialSpeed(Vector MousePosition) {
 		Vector snelheid = Vector.aftrekking(MousePosition, getPlaats());
-		if (snelheid.modulus() > MainFrame.MAX_POWER)
-			snelheid.scalair_vermenigvuldiging(MainFrame.MAX_POWER / snelheid.modulus());
-		return Vector.scalair_vermenigvuldiging(MainFrame.MOUSE_SPEED_COEFFICIENT, snelheid);
+		if (snelheid.modulus() > GameMain.MAX_POWER)
+			snelheid.scalair_vermenigvuldiging(GameMain.MAX_POWER / snelheid.modulus());
+		return Vector.scalair_vermenigvuldiging(GameMain.MOUSE_SPEED_COEFFICIENT, snelheid);
 	}
 
 	public Bal clone() {

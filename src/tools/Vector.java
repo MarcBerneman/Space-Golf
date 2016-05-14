@@ -67,4 +67,8 @@ public class Vector {
 	public Vector clone() {
 		return new Vector(x,y);
 	}
+	
+	public boolean equals(Vector other) {
+		return this.x == other.x && this.y == other.y;
+	}
 }

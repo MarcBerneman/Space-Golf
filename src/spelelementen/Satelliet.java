@@ -2,6 +2,7 @@ package spelelementen;
 
 import java.awt.Color;
 
+import gui_componenten.GameMain;
 import tools.Vector;
 
 public class Satelliet extends Cirkel {
@@ -18,7 +19,7 @@ public class Satelliet extends Cirkel {
 	}
 	
 	public void move(){
-		theta += hoeksnelheid*MainFrame.DeltaT;
+		theta += hoeksnelheid*GameMain.DeltaT;
 		Vector nieuwe_plaats = planeet.getPlaats().clone();
 		nieuwe_plaats.optelling(new Vector(omwentelingstraal*Math.cos(theta),omwentelingstraal*Math.sin(theta)));
 		this.setPlaats(nieuwe_plaats);

@@ -2,6 +2,7 @@ package spelelementen;
 
 import java.awt.Color;
 
+import gui_componenten.GameMain;
 import tools.Vector;
 
 public class Planeet extends Cirkel {
@@ -19,6 +20,6 @@ public class Planeet extends Cirkel {
 
 	public Vector zwaartekrachtveld(Vector r) {
 		Vector r_min_ri = Vector.aftrekking(r, getPlaats());
-		return Vector.scalair_vermenigvuldiging(-MainFrame.G * getMassa() / Math.pow(r_min_ri.modulus(), 3), r_min_ri);
+		return Vector.scalair_vermenigvuldiging(-GameMain.G * getMassa() / Math.pow(r_min_ri.modulus(), 3), r_min_ri);
 	}
 }
