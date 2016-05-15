@@ -13,7 +13,7 @@ public class GameMain extends JPanel{
 	public final static double MINIMAL_AVERAGE_MOVEMENT = 3.0;
 	public final static double MAX_POWER = 400;
 	public final static double AIM_TIME = 1;
-	public final static int BREEDTE= 1300, HOOGTE= 730;
+	public final static int BREEDTE= 1300, HOOGTE= 630;
 	
 	private final static JFrame frame = new JFrame("Space-Golf");
 	private JPanel activePanel;

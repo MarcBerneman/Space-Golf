@@ -34,8 +34,6 @@ public class RandomLevel {
 			Planeet planeet = new Planeet(x, y, massa, straal, Color.BLACK);
 			int reserveerde_straal;
 			if (contains(indexen_van_planeten_met_satelliet, nr_initialized_planets)) {
-				// double hoeksnelheid = rand.nextInt(2)+1;
-				// double hoek = (rand.nextInt(5)+1)*Math.PI/5;
 				double hoeksnelheid = ((rand.nextDouble() * 2) + 3) * RandomSign();
 				double hoek = rand.nextDouble() * 2 * Math.PI;
 				double afstand_tot_planeet = (rand.nextInt(5) + 4) * 10;
@@ -73,15 +71,46 @@ public class RandomLevel {
 			}
 			aantal_loops++;
 		}
-		// heeft een lijst aangemaakt van 4 of 5 planeten die elkaar niet raken en ergens op het scherm staan met
-		// een random straal tussen 30 en 100 en een massa die afhankelijk is van die straal
 
 		Hole hole = new Hole(planeten[rand.nextInt(aantalplaneten)], rand.nextDouble() * 2 * Math.PI, 20);
-		// maakt een hole op een wilekeurige planeet
-		Vector startPos = new Vector(5, 5);
+		int kwadrant = geefkwadrant(hole.getPlaats());
+		Vector startPos = geefplaats(kwadrant);
 		Bal golfbal = new Bal(startPos, 1, 10, Color.WHITE);
 		return new Level(planeten, satellieten, golfbal, hole, startPos,0);
 
+	}
+	
+	private static Vector geefplaats(int kwadrant) {
+		double x,y;
+		if (kwadrant % 2 == 1) {
+			x= GameMain.BREEDTE-10;
+		}else{
+			x= 10;
+		}
+		if (kwadrant < 3) {
+			y= GameMain.HOOGTE-10;
+		}else{
+			y= 10;
+		}
+		return new Vector(x,y);
+	}
+	
+	private static int geefkwadrant(Vector plaats) {
+		int kwadrant;
+		if (plaats.getX() < GameMain.BREEDTE/2){
+			if (plaats.getY() < GameMain.HOOGTE/2){
+				kwadrant = 1;
+			}else{
+				kwadrant = 3;
+			}
+		}else{
+			if (plaats.getY() < GameMain.HOOGTE/2){
+				kwadrant = 2;
+			}else{
+				kwadrant = 4;
+			}
+		};
+		return kwadrant;
 	}
 
 	private static int[] randomunique(int start, int end, int aantal) {
