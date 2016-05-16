@@ -35,7 +35,7 @@ public class Level {
 	}
 
 	public void ResetBall() {
-		if(!golfbal.getPlaats().equals(startPos)) {
+		if (!golfbal.getPlaats().equals(startPos)) {
 			golfbal.setStationary(true);
 			golfbal.setPlaats(startPos.clone());
 			incrementStrokes();
@@ -61,10 +61,7 @@ public class Level {
 		for (Satelliet satelliet : satellieten) {
 			satelliet.move();
 		}
-		if (hole.Score(golfbal)) {
-			System.out.println("Score!!!!!!!");
-		}
-
+		hole.Score(golfbal);
 	}
 
 	public Bal getGolfbal() {
@@ -94,7 +91,7 @@ public class Level {
 	public void setNr_strokes(int nr_strokes) {
 		this.nr_strokes = nr_strokes;
 	}
-	
+
 	public void incrementStrokes() {
 		nr_strokes++;
 	}

@@ -1,21 +1,20 @@
 package spelelementen;
 
-import java.awt.Color;
-
 import gui_componenten.GameMain;
 import tools.Vector;
 
 public class Planeet extends Cirkel {
-	
-	public Planeet(Vector plaats, int massa, int straal, Color kleur) {
-		super(plaats, massa, straal, kleur, new Vector(0,0));
+
+	public Planeet(Vector plaats, int massa, int straal) {
+		super(plaats, massa, straal, new Vector(0, 0));
 	}
 
-	public Planeet(int x, int y, int massa, int straal, Color kleur) {
-		super(x, y, massa, straal, kleur, new Vector(0,0));
+	public Planeet(int x, int y, int massa, int straal) {
+		super(x, y, massa, straal, new Vector(0, 0));
 	}
-	public Planeet(Vector plaats, int massa, int straal, Color kleur, Vector snelheid){
-		super(plaats, massa, straal, kleur, snelheid);
+
+	public Planeet(Vector plaats, int massa, int straal, Vector snelheid) {
+		super(plaats, massa, straal, snelheid);
 	}
 
 	public Vector zwaartekrachtveld(Vector r) {

@@ -9,20 +9,20 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class PlayPanel extends JPanel implements ActionListener{
+public class PlayPanel extends JPanel implements ActionListener {
 	private LevelPanel levelpanel;
 	private final JButton Reset = new JButton("Reset");
 	private final JButton Quit = new JButton("Quit");
 	private GameMain window;
-	
+
 	public PlayPanel(GameMain window, LevelPanel levelpanel) {
-		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		Container buttons = new Container();
-		buttons.setLayout(new BoxLayout(buttons,BoxLayout.X_AXIS));
+		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 		this.levelpanel = levelpanel;
 		this.window = window;
 		levelpanel.information.setFocusable(false);
-		levelpanel.information.setMaximumSize(new Dimension(130,18));
+		levelpanel.information.setMaximumSize(new Dimension(130, 18));
 		buttons.add(Reset);
 		buttons.add(Quit);
 		buttons.add(levelpanel.information);
@@ -34,11 +34,12 @@ public class PlayPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == Reset)
+		if (e.getSource() == Reset) {
 			levelpanel.getLevel().ResetBall();
-		else if(e.getSource() == Quit)
+			levelpanel.getLevel().getHole().setScored(false);
+		} else if (e.getSource() == Quit) {
 			window.switchPanel();
+		}
 	}
-	
-	
+
 }

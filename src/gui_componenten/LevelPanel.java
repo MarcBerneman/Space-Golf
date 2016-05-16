@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -26,28 +24,27 @@ import spelelementen.Satelliet;
 import spelelementen.Traject;
 
 @SuppressWarnings("serial")
-public class LevelPanel extends JPanel implements MouseListener, KeyListener, ActionListener, MouseMotionListener {
+public class LevelPanel extends JPanel implements MouseListener, ActionListener, MouseMotionListener {
 	private final Level level;
 	private Timer timer = new Timer((int) (GameMain.DeltaT * 1000), this);
 	private Vector muis_positie = new Vector(0, 0);
 	final static String IMAGE_FOLDER = "images/";
 	private Image[] afbeeldingen;
 	private Image Background;
-	
-	public final JTextArea information = new JTextArea(1,1);
-	
+
+	public final JTextArea information = new JTextArea(1, 1);
+
 	public LevelPanel(Level level) {
 		this.level = level;
-		setPreferredSize(new Dimension(GameMain.BREEDTE,GameMain.HOOGTE));
+		setPreferredSize(new Dimension(GameMain.BREEDTE, GameMain.HOOGTE));
 		setFocusable(true);
 		addMouseListener(this);
-		addKeyListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		afbeeldingen = new Image[level.getPlaneten().length];
 		setBackground(Color.BLACK);
-		for (int i = 0; i< level.getPlaneten().length; i++){
-			afbeeldingen[i] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + i+".png")).getImage();
+		for (int i = 0; i < level.getPlaneten().length; i++) {
+			afbeeldingen[i] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + i + ".png")).getImage();
 		}
 		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
 		timer.start();
@@ -56,26 +53,38 @@ public class LevelPanel extends JPanel implements MouseListener, KeyListener, Ac
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.drawImage(Background, 0, 0, getWidth(), getHeight(), this);
-		for (Planeet planeet : level.getPlaneten()) {
-			planeet.paintme(g);
-		}
-		for (int i=0;i<level.getPlaneten().length;i++){
-			int uitwijking = level.getPlaneten()[i].getStraal();
-			int x = (int) level.getPlaneten()[i].getPlaats().getX()-uitwijking;
-			int y = (int) level.getPlaneten()[i].getPlaats().getY()-uitwijking;
-			g.drawImage(afbeeldingen[i], x, y, 2*uitwijking, 2*uitwijking, this);
 
+		for (int i = 0; i < level.getPlaneten().length; i++) {
+			int straal = level.getPlaneten()[i].getStraal();
+			int x = (int) level.getPlaneten()[i].getPlaats().getX();
+			int y = (int) level.getPlaneten()[i].getPlaats().getY();
+			g.drawImage(afbeeldingen[i], x - straal, y - straal, 2 * straal, 2 * straal, this);
 		}
-		level.getGolfbal().paintme(g);
-		level.getHole().paintme(g);
+		Image holeImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "hole.png")).getImage();
+		int holeX = (int) level.getHole().getPlaats().getX() - level.getHole().getStraal();
+		int holeY = (int) level.getHole().getPlaats().getY() - level.getHole().getStraal();
+		g.drawImage(holeImg, holeX, holeY, 2 * level.getHole().getStraal(), 2 * level.getHole().getStraal(), this);
+		if (!level.getHole().getScored()) {
+			Image golfbalImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "golfbal.png")).getImage();
+			int golfbalX = (int) level.getGolfbal().getPlaats().getX() - level.getGolfbal().getStraal();
+			int golfbalY = (int) level.getGolfbal().getPlaats().getY() - level.getGolfbal().getStraal();
+			g.drawImage(golfbalImg, golfbalX, golfbalY, 2 * level.getGolfbal().getStraal(),
+					2 * level.getGolfbal().getStraal(), this);
+		}
 		for (Satelliet satelliet : level.getSatellieten()) {
-			satelliet.paintme(g);
+			Image satellietImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "satelliet.png")).getImage();
+			int satellietX = (int) satelliet.getPlaats().getX() - satelliet.getStraal();
+			int satellietY = (int) satelliet.getPlaats().getY() - satelliet.getStraal();
+			g.drawImage(satellietImg, satellietX, satellietY, 2 * satelliet.getStraal(), 2 * satelliet.getStraal(),
+					this);
 		}
 		if (level.getGolfbal().isStationary()) {
-			Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
+			if (!level.getHole().getScored()) {
+				Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
+			}
 		}
-		if (level.getGolfbal().outOfBounds(GameMain.BREEDTE,GameMain.HOOGTE)){
-			OutOfBoundsBox.drawBox(g,level.getGolfbal(),GameMain.BREEDTE, GameMain.HOOGTE);
+		if (level.getGolfbal().outOfBounds(GameMain.BREEDTE, GameMain.HOOGTE)) {
+			OutOfBoundsBox.drawBox(g, level.getGolfbal(), GameMain.BREEDTE, GameMain.HOOGTE);
 		}
 
 	}
@@ -88,26 +97,19 @@ public class LevelPanel extends JPanel implements MouseListener, KeyListener, Ac
 	public void actionPerformed(ActionEvent e) {
 		level.turn();
 		repaint();
-		information.setText("Strokes: " + level.getNr_strokes() + ", Par: " + (level.getPar() > 0 ? level.getPar() : "N/A"));
+		information.setText(
+				"Strokes: " + level.getNr_strokes() + ", Par: " + (level.getPar() > 0 ? level.getPar() : "N/A"));
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Bal b = level.getGolfbal();
-		if (b.isStationary()) {
-			b.setSnelheid(b.InitialSpeed(muis_positie));
-			b.setStationary(false);
-			level.incrementStrokes();
-		}
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_R:
-			level.ResetBall();
-			repaint();
-			break;
+		if (!level.getHole().getScored()) {
+			if (b.isStationary()) {
+				b.setSnelheid(b.InitialSpeed(muis_positie));
+				b.setStationary(false);
+				level.incrementStrokes();
+			}
 		}
 	}
 
@@ -137,18 +139,6 @@ public class LevelPanel extends JPanel implements MouseListener, KeyListener, Ac
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
 	}

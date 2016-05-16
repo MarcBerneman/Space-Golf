@@ -1,6 +1,5 @@
 package spelelementen;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,7 +14,7 @@ public class RandomLevel {
 		Random rand = new Random();
 		int aantalplaneten = rand.nextInt(3) + 3;
 		int aantalsatellieten = rand.nextInt(2) + 1;
-		if(aantalsatellieten > aantalplaneten)
+		if (aantalsatellieten > aantalplaneten)
 			aantalsatellieten = rand.nextInt(2) + 1;
 		int aantal_loops = 0;
 		Planeet[] planeten = new Planeet[aantalplaneten];
@@ -29,9 +28,9 @@ public class RandomLevel {
 		while (nr_initialized_planets < aantalplaneten) {
 			int straal = rand.nextInt(71) + 50;
 			int massa = (int) (DICHTHEID * straal * straal);
-			int x = rand.nextInt(GameMain.BREEDTE - straal * 2) + straal; // kan een positie nemen in de breedte van het scherm zonder de straal
+			int x = rand.nextInt(GameMain.BREEDTE - straal * 2) + straal; // kan een positie nemen in de breedte van het scherm zonder de straal 
 			int y = rand.nextInt(GameMain.HOOGTE - straal * 2) + straal; // hetzelfde maar voor de breedte
-			Planeet planeet = new Planeet(x, y, massa, straal, Color.BLACK);
+			Planeet planeet = new Planeet(x, y, massa, straal);
 			int reserveerde_straal;
 			if (contains(indexen_van_planeten_met_satelliet, nr_initialized_planets)) {
 				// double hoeksnelheid = rand.nextInt(2)+1;
@@ -40,13 +39,13 @@ public class RandomLevel {
 				double hoek = rand.nextDouble() * 2 * Math.PI;
 				double afstand_tot_planeet = (rand.nextInt(5) + 4) * 10;
 				int straalmaan = rand.nextInt(6) + 15;
-				satellieten[nr_initialized_satelites] = new Satelliet(hoeksnelheid, planeet, afstand_tot_planeet,
-						Color.WHITE, hoek, straalmaan);
+				satellieten[nr_initialized_satelites] = new Satelliet(hoeksnelheid, planeet, afstand_tot_planeet, hoek,
+						straalmaan);
 				reserveerde_straal = (int) (RESERVED * (afstand_tot_planeet + planeet.getStraal() + 2 * straalmaan));
 			} else {
 				reserveerde_straal = (int) (RESERVED * planeet.getStraal());
 			}
-			Cirkel bezetgebied = new Cirkel(x, y, 0, reserveerde_straal, Color.WHITE);
+			Cirkel bezetgebied = new Cirkel(x, y, 0, reserveerde_straal);
 
 			boolean checkcoliding = true;
 
@@ -63,7 +62,7 @@ public class RandomLevel {
 				nr_initialized_planets++;
 				reserveerde_ruimtes.add(bezetgebied);
 			}
-			if(aantal_loops > 2000) {
+			if (aantal_loops > 2000) {
 				aantal_loops = 0;
 				planeten = new Planeet[aantalplaneten];
 				satellieten = new Satelliet[aantalsatellieten];
@@ -73,15 +72,52 @@ public class RandomLevel {
 			}
 			aantal_loops++;
 		}
-		// heeft een lijst aangemaakt van 4 of 5 planeten die elkaar niet raken en ergens op het scherm staan met
-		// een random straal tussen 30 en 100 en een massa die afhankelijk is van die straal
+		// heeft een lijst aangemaakt van 4 of 5 planeten die elkaar niet raken
+		// en ergens op het scherm staan met
+		// een random straal tussen 30 en 100 en een massa die afhankelijk is
+		// van die straal
 
 		Hole hole = new Hole(planeten[rand.nextInt(aantalplaneten)], rand.nextDouble() * 2 * Math.PI, 20);
 		// maakt een hole op een wilekeurige planeet
-		Vector startPos = new Vector(5, 5);
-		Bal golfbal = new Bal(startPos, 1, 10, Color.WHITE);
-		return new Level(planeten, satellieten, golfbal, hole, startPos,0);
+		int kwadrant = geefkwadrant(hole.getPlaats());
+		Vector startPos = geefplaats(kwadrant);
+		Bal golfbal = new Bal(startPos, 1, 10);
+		return new Level(planeten, satellieten, golfbal, hole, startPos, 0);
 
+	}
+
+	private static Vector geefplaats(int kwadrant) {
+		double x, y;
+		if (kwadrant % 2 == 1) {
+			x = GameMain.BREEDTE - 10;
+		} else {
+			x = 10;
+		}
+		if (kwadrant < 3) {
+			y = GameMain.HOOGTE - 10;
+		} else {
+			y = 10;
+		}
+		return new Vector(x, y);
+	}
+
+	private static int geefkwadrant(Vector plaats) {
+		int kwadrant;
+		if (plaats.getX() < GameMain.BREEDTE / 2) {
+			if (plaats.getY() < GameMain.HOOGTE / 2) {
+				kwadrant = 1;
+			} else {
+				kwadrant = 3;
+			}
+		} else {
+			if (plaats.getY() < GameMain.HOOGTE / 2) {
+				kwadrant = 2;
+			} else {
+				kwadrant = 4;
+			}
+		}
+		;
+		return kwadrant;
 	}
 
 	private static int[] randomunique(int start, int end, int aantal) {

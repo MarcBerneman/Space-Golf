@@ -7,7 +7,6 @@ public class Vector {
 		this.x = x;
 		this.y = y;
 	}
-	//Dit is zware shit
 
 	public double modulus() {
 		return Math.sqrt(x * x + y * y);
@@ -34,7 +33,7 @@ public class Vector {
 		this.x += other.x;
 		this.y += other.y;
 	}
-	
+
 	public void aftrekking(Vector other) {
 		this.x -= other.x;
 		this.y -= other.y;
@@ -63,11 +62,11 @@ public class Vector {
 	public void setY(double y) {
 		this.y = y;
 	}
-	
+
 	public Vector clone() {
-		return new Vector(x,y);
+		return new Vector(x, y);
 	}
-	
+
 	public boolean equals(Vector other) {
 		return this.x == other.x && this.y == other.y;
 	}

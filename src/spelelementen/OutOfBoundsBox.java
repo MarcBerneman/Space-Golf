@@ -77,7 +77,8 @@ public class OutOfBoundsBox {
 	}
 
 	private static void centerString(Graphics g, String s, int x, int y, Font font) {
-		// overgenomen van http://parallel.vub.ac.be/education/java/practica/Reeks5/Puzzelpaneel.java
+		// overgenomen van
+		// http://parallel.vub.ac.be/education/java/practica/Reeks5/Puzzelpaneel.java
 		Rectangle2D r2D = font.getStringBounds(s, new FontRenderContext(null, true, true));
 		int rWidth = (int) Math.round(r2D.getWidth());
 		int rHeight = (int) Math.round(r2D.getHeight());
