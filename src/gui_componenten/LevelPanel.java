@@ -29,7 +29,8 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 	private Timer timer = new Timer((int) (GameMain.DeltaT * 1000), this);
 	private Vector muis_positie = new Vector(0, 0);
 	final static String IMAGE_FOLDER = "images/";
-	private Image[] afbeeldingen;
+	private Image[] planeet_afbeeldingen;
+	private Image[] satelliet_afbeeldingen;
 	private Image Background;
 
 	public final JTextArea information = new JTextArea(1, 1);
@@ -41,10 +42,14 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		addMouseListener(this);
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		afbeeldingen = new Image[level.getPlaneten().length];
+		planeet_afbeeldingen = new Image[level.getPlaneten().length];
+		satelliet_afbeeldingen = new Image[level.getSatellieten().length];
 		setBackground(Color.BLACK);
 		for (int i = 0; i < level.getPlaneten().length; i++) {
-			afbeeldingen[i] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + i + ".png")).getImage();
+			planeet_afbeeldingen[i] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "planeet" + i + ".png")).getImage();
+		}
+		for (int i = 0; i < level.getSatellieten().length; i++) {
+			satelliet_afbeeldingen[i] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "maan" + i + ".png")).getImage();
 		}
 		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
 		timer.start();
@@ -58,7 +63,7 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 			int straal = level.getPlaneten()[i].getStraal();
 			int x = (int) level.getPlaneten()[i].getPlaats().getX();
 			int y = (int) level.getPlaneten()[i].getPlaats().getY();
-			g.drawImage(afbeeldingen[i], x - straal, y - straal, 2 * straal, 2 * straal, this);
+			g.drawImage(planeet_afbeeldingen[i], x - straal, y - straal, 2 * straal, 2 * straal, this);
 		}
 		Image holeImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "hole.png")).getImage();
 		int holeX = (int) level.getHole().getPlaats().getX() - level.getHole().getStraal();
@@ -71,12 +76,11 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 			g.drawImage(golfbalImg, golfbalX, golfbalY, 2 * level.getGolfbal().getStraal(),
 					2 * level.getGolfbal().getStraal(), this);
 		}
-		for (Satelliet satelliet : level.getSatellieten()) {
-			Image satellietImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "maan0.png")).getImage();
-			int satellietX = (int) satelliet.getPlaats().getX() - satelliet.getStraal();
-			int satellietY = (int) satelliet.getPlaats().getY() - satelliet.getStraal();
-			g.drawImage(satellietImg, satellietX, satellietY, 2 * satelliet.getStraal(), 2 * satelliet.getStraal(),
-					this);
+		for (int i = 0; i < level.getSatellieten().length; i++) {
+			int straal = level.getSatellieten()[i].getStraal();
+			int satellietX = (int) level.getSatellieten()[i].getPlaats().getX() - level.getSatellieten()[i].getStraal();
+			int satellietY = (int) level.getSatellieten()[i].getPlaats().getY() - level.getSatellieten()[i].getStraal();
+			g.drawImage(satelliet_afbeeldingen[i], satellietX, satellietY, 2 * straal, 2 * straal, this);
 		}
 		if (level.getGolfbal().isStationary()) {
 			if (!level.getHole().getScored()) {
