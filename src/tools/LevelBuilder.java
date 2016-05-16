@@ -56,6 +56,7 @@ public class LevelBuilder {
 			Bal golfbal = golfbalBuilder(startpos);
 
 			theLine = reader.readLine().split(",");
+			reader.close();
 			int par = Integer.parseInt(theLine[0]);
 
 			lev = new Level(planeten, satellieten, golfbal, hole, startpos, par);

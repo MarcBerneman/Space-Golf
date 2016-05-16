@@ -1,5 +1,6 @@
 package gui_componenten;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -27,7 +28,10 @@ public class PlayPanel extends JPanel implements ActionListener {
 		buttons.add(Quit);
 		buttons.add(levelpanel.information);
 		add(buttons);
+		levelpanel.information.setOpaque(false);
+		levelpanel.information.setBackground(new Color(0, 0, 0, 0));
 		add(levelpanel);
+		
 		Reset.addActionListener(this);
 		Quit.addActionListener(this);
 	}

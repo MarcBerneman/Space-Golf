@@ -72,7 +72,7 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 					2 * level.getGolfbal().getStraal(), this);
 		}
 		for (Satelliet satelliet : level.getSatellieten()) {
-			Image satellietImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "satelliet.png")).getImage();
+			Image satellietImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "maan0.png")).getImage();
 			int satellietX = (int) satelliet.getPlaats().getX() - satelliet.getStraal();
 			int satellietY = (int) satelliet.getPlaats().getY() - satelliet.getStraal();
 			g.drawImage(satellietImg, satellietX, satellietY, 2 * satelliet.getStraal(), 2 * satelliet.getStraal(),
