@@ -33,8 +33,6 @@ public class RandomLevel {
 			Planeet planeet = new Planeet(x, y, massa, straal);
 			int reserveerde_straal;
 			if (contains(indexen_van_planeten_met_satelliet, nr_initialized_planets)) {
-				// double hoeksnelheid = rand.nextInt(2)+1;
-				// double hoek = (rand.nextInt(5)+1)*Math.PI/5;
 				double hoeksnelheid = ((rand.nextDouble() * 2) + 3) * RandomSign();
 				double hoek = rand.nextDouble() * 2 * Math.PI;
 				double afstand_tot_planeet = (rand.nextInt(5) + 4) * 10;
@@ -85,38 +83,37 @@ public class RandomLevel {
 		return new Level(planeten, satellieten, golfbal, hole, startPos, 0);
 
 	}
-
+	
 	private static Vector geefplaats(int kwadrant) {
-		double x, y;
+		double x,y;
 		if (kwadrant % 2 == 1) {
-			x = GameMain.BREEDTE - 10;
-		} else {
-			x = 10;
+			x= GameMain.BREEDTE-10;
+		}else{
+			x= 10;
 		}
 		if (kwadrant < 3) {
-			y = GameMain.HOOGTE - 10;
-		} else {
-			y = 10;
+			y= GameMain.HOOGTE-10;
+		}else{
+			y= 10;
 		}
-		return new Vector(x, y);
+		return new Vector(x,y);
 	}
-
+	
 	private static int geefkwadrant(Vector plaats) {
 		int kwadrant;
-		if (plaats.getX() < GameMain.BREEDTE / 2) {
-			if (plaats.getY() < GameMain.HOOGTE / 2) {
+		if (plaats.getX() < GameMain.BREEDTE/2){
+			if (plaats.getY() < GameMain.HOOGTE/2){
 				kwadrant = 1;
-			} else {
+			}else{
 				kwadrant = 3;
 			}
-		} else {
-			if (plaats.getY() < GameMain.HOOGTE / 2) {
+		}else{
+			if (plaats.getY() < GameMain.HOOGTE/2){
 				kwadrant = 2;
-			} else {
+			}else{
 				kwadrant = 4;
 			}
-		}
-		;
+		};
 		return kwadrant;
 	}
 
