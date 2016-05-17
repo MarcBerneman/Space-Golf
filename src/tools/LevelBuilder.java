@@ -17,6 +17,8 @@ public class LevelBuilder {
 	private String level;
 	private static final String RESOURCE_FOLDER = "textfiles/";
 	private static final String fileName = RESOURCE_FOLDER + "Levels.txt";
+	private final static double DICHTHEID = 1;
+
 
 	public LevelBuilder(int level) {
 		this.level = "L" + level;
@@ -90,16 +92,14 @@ public class LevelBuilder {
 	private Satelliet[] satellietenBuilder(String[] theLine, Planeet[] planeten) {
 		int aantal_sat = Integer.parseInt(theLine[0]);
 		Satelliet[] satellieten = null;
-		if (aantal_sat > 0) {
-			satellieten = new Satelliet[aantal_sat];
-			for (int i = 0; i < aantal_sat; i++) {
-				double hoeksnelheid = Double.parseDouble(theLine[i + 1]);
-				Planeet planeet = planeten[Integer.parseInt(theLine[i + 1 + aantal_sat])];
-				double afstand_tot_planeet = Double.parseDouble(theLine[i + 1 + 2 * aantal_sat]);
-				double beginhoek = Double.parseDouble(theLine[i + 1 + 3 * aantal_sat]);
-				int straal = Integer.parseInt(theLine[i + 1 + 4 * aantal_sat]);
-				satellieten[i] = new Satelliet(hoeksnelheid, planeet, afstand_tot_planeet, beginhoek, straal);
-			}
+		satellieten = new Satelliet[aantal_sat];
+		for (int i = 0; i < aantal_sat; i++) {
+			double hoeksnelheid = Double.parseDouble(theLine[i + 1]);
+			Planeet planeet = planeten[Integer.parseInt(theLine[i + 1 + aantal_sat])];
+			double afstand_tot_planeet = Double.parseDouble(theLine[i + 1 + 2 * aantal_sat]);
+			double beginhoek = Double.parseDouble(theLine[i + 1 + 3 * aantal_sat]);
+			int straal = Integer.parseInt(theLine[i + 1 + 4 * aantal_sat]);
+			satellieten[i] = new Satelliet(hoeksnelheid, planeet, afstand_tot_planeet, beginhoek, straal);
 		}
 		return satellieten;
 	}
@@ -110,8 +110,8 @@ public class LevelBuilder {
 		for (int i = 0; i < aantal_planeten; i++) {
 			Vector pos = new Vector(Integer.parseInt(theLine[i + 1]),
 					Integer.parseInt(theLine[i + 1 + aantal_planeten]));
-			int massa = Integer.parseInt(theLine[i + 1 + 2 * aantal_planeten]);
-			int straal = Integer.parseInt(theLine[i + 1 + 3 * aantal_planeten]);
+			int straal = Integer.parseInt(theLine[i + 1 + 2 * aantal_planeten]);
+			int massa = (int) (DICHTHEID * straal * straal);
 			planeten[i] = new Planeet(pos, massa, straal);
 		}
 		return planeten;

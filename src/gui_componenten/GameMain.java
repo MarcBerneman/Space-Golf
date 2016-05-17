@@ -13,23 +13,23 @@ public class GameMain extends JPanel {
 	public final static double MINIMAL_AVERAGE_MOVEMENT = 3.0;
 	public final static double MAX_POWER = 400;
 	public final static double AIM_TIME = 1;
-	public final static int BREEDTE = 1300, HOOGTE = 730;
+	public final static int BREEDTE = 1300, HOOGTE = 712;
 
 	private final static JFrame frame = new JFrame("Space-Golf");
 	private JPanel activePanel;
 
 	public static void main(String args[]) {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setFocusable(true);
 		frame.setContentPane(new GameMain());
 		frame.pack();
+		frame.setFocusable(true);
 		frame.setVisible(true);
 	}
 
 	public GameMain() {
 		// overgenomen van ProjectTemplate <-- Beerend
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS)); // is nodig zodat paneel heel de ruimte bedekt
-		activePanel = new MenuPanel(this); // het eerste paneel dat getoond wordt
+		activePanel = new MainMenuPanel(this); // het eerste paneel dat getoond wordt
 		add(activePanel);
 		setPreferredSize(activePanel.getPreferredSize());
 	}
@@ -47,6 +47,6 @@ public class GameMain extends JPanel {
 
 	public void switchPanel() {
 		// overgenomen van ProjectTemplate <-- Beerend
-		switchPanel(new MenuPanel(this)); // terug naar het begin
+		switchPanel(new MainMenuPanel(this)); // terug naar het begin
 	}
 }

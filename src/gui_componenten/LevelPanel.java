@@ -40,7 +40,6 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		setPreferredSize(new Dimension(GameMain.BREEDTE, GameMain.HOOGTE));
 		setFocusable(true);
 		addMouseListener(this);
-		addMouseListener(this);
 		addMouseMotionListener(this);
 		planeet_afbeeldingen = new Image[level.getPlaneten().length];
 		satelliet_afbeeldingen = new Image[level.getSatellieten().length];
@@ -69,28 +68,26 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		int holeX = (int) level.getHole().getPlaats().getX() - level.getHole().getStraal();
 		int holeY = (int) level.getHole().getPlaats().getY() - level.getHole().getStraal();
 		g.drawImage(holeImg, holeX, holeY, 2 * level.getHole().getStraal(), 2 * level.getHole().getStraal(), this);
-		if (!level.getHole().getScored()) {
-			Image golfbalImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "golfbal.png")).getImage();
-			int golfbalX = (int) level.getGolfbal().getPlaats().getX() - level.getGolfbal().getStraal();
-			int golfbalY = (int) level.getGolfbal().getPlaats().getY() - level.getGolfbal().getStraal();
-			g.drawImage(golfbalImg, golfbalX, golfbalY, 2 * level.getGolfbal().getStraal(),
-					2 * level.getGolfbal().getStraal(), this);
-		}
 		for (int i = 0; i < level.getSatellieten().length; i++) {
 			int straal = level.getSatellieten()[i].getStraal();
 			int satellietX = (int) level.getSatellieten()[i].getPlaats().getX() - level.getSatellieten()[i].getStraal();
 			int satellietY = (int) level.getSatellieten()[i].getPlaats().getY() - level.getSatellieten()[i].getStraal();
 			g.drawImage(satelliet_afbeeldingen[i], satellietX, satellietY, 2 * straal, 2 * straal, this);
 		}
-		if (level.getGolfbal().isStationary()) {
-			if (!level.getHole().getScored()) {
+		
+		if (!level.getHole().getScored()) {
+			if (level.getGolfbal().outOfBounds(GameMain.BREEDTE, GameMain.HOOGTE)) {
+				OutOfBoundsBox.drawBox(g, level.getGolfbal(), GameMain.BREEDTE, GameMain.HOOGTE);
+			}
+			Image golfbalImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "golfbal.png")).getImage();
+			int golfbalX = (int) level.getGolfbal().getPlaats().getX() - level.getGolfbal().getStraal();
+			int golfbalY = (int) level.getGolfbal().getPlaats().getY() - level.getGolfbal().getStraal();
+			g.drawImage(golfbalImg, golfbalX, golfbalY, 2 * level.getGolfbal().getStraal(),
+					2 * level.getGolfbal().getStraal(), this);
+			if (level.getGolfbal().isStationary()) {
 				Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
 			}
 		}
-		if (level.getGolfbal().outOfBounds(GameMain.BREEDTE, GameMain.HOOGTE)) {
-			OutOfBoundsBox.drawBox(g, level.getGolfbal(), GameMain.BREEDTE, GameMain.HOOGTE);
-		}
-
 	}
 
 	public Level getLevel() {
@@ -99,29 +96,34 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		level.turn();
-		repaint();
-		information.setText(
+		if(!PlayPanel.pause){
+			level.turn();
+			repaint();
+			information.setText(
 				"Strokes: " + level.getNr_strokes() + ", Par: " + (level.getPar() > 0 ? level.getPar() : "N/A"));
+		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Bal b = level.getGolfbal();
-		if (!level.getHole().getScored()) {
-			if (b.isStationary()) {
-				b.setSnelheid(b.InitialSpeed(muis_positie));
-				b.setStationary(false);
-				level.incrementStrokes();
+		if(!PlayPanel.pause){
+			Bal b = level.getGolfbal();
+			if (!level.getHole().getScored()) {
+				if (b.isStationary()) {
+					b.setSnelheid(b.InitialSpeed(muis_positie));
+					b.setStationary(false);
+					level.incrementStrokes();
+				}
 			}
 		}
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		muis_positie = new Vector(e.getX(), e.getY());
-		repaint();
-
+		if(!PlayPanel.pause){
+			muis_positie = new Vector(e.getX(), e.getY());
+			repaint();
+		}
 	}
 
 	@Override

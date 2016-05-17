@@ -5,16 +5,20 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class PlayPanel extends JPanel implements ActionListener {
+public class PlayPanel extends JPanel implements ActionListener, KeyListener {
 	private LevelPanel levelpanel;
 	private final JButton Reset = new JButton("Reset");
 	private final JButton Quit = new JButton("Quit");
 	private GameMain window;
+	
+	static boolean pause = false;
 
 	public PlayPanel(GameMain window, LevelPanel levelpanel) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -34,6 +38,8 @@ public class PlayPanel extends JPanel implements ActionListener {
 		
 		Reset.addActionListener(this);
 		Quit.addActionListener(this);
+		setFocusable(true);
+		addKeyListener(this);
 	}
 
 	@Override
@@ -46,4 +52,25 @@ public class PlayPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("key pressed");
+		int key = e.getKeyCode();
+		if(key==KeyEvent.VK_P){
+            pause = true;
+            System.out.println("paused");
+        }
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

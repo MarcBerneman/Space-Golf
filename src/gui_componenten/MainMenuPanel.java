@@ -2,23 +2,20 @@ package gui_componenten;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import spelelementen.RandomLevel;
 import tools.LevelBuilder;
 
-public class MenuPanel extends JPanel implements ActionListener {
+public class MainMenuPanel extends JPanel implements ActionListener {
 	private final JButton Play = new JButton("Play");
 	private final JButton PlayLevel = new JButton("Level");
 	private final JButton PlayRandom = new JButton("Random Level");
 	private GameMain window;
 	private final LevelBuilder levelbuilder = new LevelBuilder(1);
 
-	public MenuPanel(GameMain window) {
+	public MainMenuPanel(GameMain window) {
 		this.window = window;
 		Play.addActionListener(this);
 		PlayLevel.addActionListener(this);
