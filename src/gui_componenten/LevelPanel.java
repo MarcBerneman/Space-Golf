@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -25,7 +26,7 @@ import spelelementen.Traject;
 
 @SuppressWarnings("serial")
 public class LevelPanel extends JPanel implements MouseListener, ActionListener, MouseMotionListener {
-	private final Level level;
+	private Level level;
 	private Timer timer = new Timer((int) (GameMain.DeltaT * 1000), this);
 	private Vector muis_positie = new Vector(0, 0);
 	final static String IMAGE_FOLDER = "images/";
@@ -34,6 +35,7 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 	private Image Background;
 
 	public final JTextArea information = new JTextArea(1, 1);
+	public final JButton Next = new JButton("Next");
 
 	public LevelPanel(Level level) {
 		this.level = level;
@@ -94,6 +96,10 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		return level;
 	}
 
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(!PlayPanel.pause){
@@ -102,6 +108,8 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 			information.setText(
 				"Strokes: " + level.getNr_strokes() + ", Par: " + (level.getPar() > 0 ? level.getPar() : "N/A"));
 		}
+		if(level.getHole().getScored())
+			Next.setVisible(true);
 	}
 
 	@Override

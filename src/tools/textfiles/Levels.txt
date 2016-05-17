@@ -5,7 +5,7 @@ Hole: Planeet planeet, double theta
 Vector startpos
 int par
 
-L
+L1
 1,900,320,150
 0
 0,-0.78

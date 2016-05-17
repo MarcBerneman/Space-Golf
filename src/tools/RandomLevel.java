@@ -1,14 +1,19 @@
-package spelelementen;
+package tools;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import gui_componenten.GameMain;
-import tools.Vector;
+import spelelementen.Bal;
+import spelelementen.Cirkel;
+import spelelementen.Hole;
+import spelelementen.Level;
+import spelelementen.Planeet;
+import spelelementen.Satelliet;
 
 public class RandomLevel {
 	private final static double RESERVED = 1.5;
-	private final static double DICHTHEID = 0.75;
+	private final static double DICHTHEID = 1;
 
 	public static Level GenerateRandomLevel() {
 		Random rand = new Random();

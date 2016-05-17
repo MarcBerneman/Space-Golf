@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import spelelementen.RandomLevel;
+import tools.RandomLevel;
 
 public class PauseMenuPanel extends JPanel implements ActionListener {
 
