@@ -31,7 +31,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 			PlayPanel p = new PlayPanel(window,LevelQueue.PLAY);
 			window.switchPanel(p);
 		} else if (e.getSource() == PlayLevel) {
-			PlayPanel p = new PlayPanel(window,3);
+			LevelMenuPanel p = new LevelMenuPanel(window);
 			window.switchPanel(p);
 		} else if (e.getSource() == PlayRandom) {
 			PlayPanel p = new PlayPanel(window,LevelQueue.RANDOMLEVEL);
