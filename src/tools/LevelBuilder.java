@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import gui_componenten.ImageHandler;
 import spelelementen.Bal;
 import spelelementen.Hole;
 import spelelementen.Level;
@@ -17,7 +18,10 @@ public class LevelBuilder {
 	private String level;
 	private static final String RESOURCE_FOLDER = "textfiles/";
 	private static final String fileName = RESOURCE_FOLDER + "Levels.txt";
+	final static String IMAGE_FOLDER = "images/";
 	private final static double DICHTHEID = 1;
+	
+	private final ImageHandler imghandler = new ImageHandler();
 
 
 	public LevelBuilder(int level) {
@@ -80,12 +84,12 @@ public class LevelBuilder {
 	}
 
 	private Bal golfbalBuilder(Vector startpos) {
-		Bal golfbal = new Bal(startpos, 1, 10);
+		Bal golfbal = new Bal(startpos, 1, 10,imghandler.BalImage());
 		return golfbal;
 	}
 
 	private Hole holeBuilder(String[] theLine, Planeet[] planeten) {
-		Hole hole = new Hole(planeten[Integer.parseInt(theLine[0])], Double.parseDouble(theLine[1]), 20);
+		Hole hole = new Hole(planeten[Integer.parseInt(theLine[0])], Double.parseDouble(theLine[1]), 20, imghandler.HoleImage());
 		return hole;
 	}
 
@@ -99,7 +103,7 @@ public class LevelBuilder {
 			double afstand_tot_planeet = Double.parseDouble(theLine[i + 1 + 2 * aantal_sat]);
 			double beginhoek = Double.parseDouble(theLine[i + 1 + 3 * aantal_sat]);
 			int straal = Integer.parseInt(theLine[i + 1 + 4 * aantal_sat]);
-			satellieten[i] = new Satelliet(hoeksnelheid, planeet, afstand_tot_planeet, beginhoek, straal);
+			satellieten[i] = new Satelliet(hoeksnelheid, planeet, afstand_tot_planeet, beginhoek, straal,imghandler.MaanImage());
 		}
 		return satellieten;
 	}
@@ -112,7 +116,7 @@ public class LevelBuilder {
 					Integer.parseInt(theLine[i + 1 + aantal_planeten]));
 			int straal = Integer.parseInt(theLine[i + 1 + 2 * aantal_planeten]);
 			int massa = (int) (DICHTHEID * straal * straal);
-			planeten[i] = new Planeet(pos, massa, straal);
+			planeten[i] = new Planeet(pos, massa, straal,imghandler.PlaneetImage());
 		}
 		return planeten;
 	}

@@ -1,5 +1,7 @@
 package spelelementen;
 
+import java.awt.Image;
+
 import gui_componenten.GameMain;
 import tools.Vector;
 
@@ -7,9 +9,9 @@ public class Satelliet extends Cirkel {
 	private double theta, hoeksnelheid, omwentelingstraal;
 	private Planeet planeet;
 
-	public Satelliet(double hoeksnelheid, Planeet planeet, double afstand_tot_planeet, double beginhoek, int straal) {
+	public Satelliet(double hoeksnelheid, Planeet planeet, double afstand_tot_planeet, double beginhoek, int straal, Image image) {
 		super(new Vector((afstand_tot_planeet + planeet.getStraal()) * Math.cos(beginhoek),
-				(afstand_tot_planeet + planeet.getStraal()) * Math.sin(beginhoek)), 0, straal);
+				(afstand_tot_planeet + planeet.getStraal()) * Math.sin(beginhoek)), 0, straal, image);
 		this.planeet = planeet;
 		this.omwentelingstraal = afstand_tot_planeet + planeet.getStraal();
 		this.hoeksnelheid = hoeksnelheid;

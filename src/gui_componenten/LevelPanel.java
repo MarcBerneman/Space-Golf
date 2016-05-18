@@ -58,41 +58,23 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
 		timer.start();
 	}
-
+	
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.drawImage(Background, 0, 0, getWidth(), getHeight(), this);
-
-		for (int i = 0; i < level.getPlaneten().length; i++) {
-			int straal = level.getPlaneten()[i].getStraal();
-			int x = (int) level.getPlaneten()[i].getPlaats().getX();
-			int y = (int) level.getPlaneten()[i].getPlaats().getY();
-			g.drawImage(planeet_afbeeldingen[i], x - straal, y - straal, 2 * straal, 2 * straal, this);
-		}
 		
-		Image holeImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "hole.png")).getImage();
-		int holeX = (int) level.getHole().getPlaats().getX() - level.getHole().getStraal();
-		int holeY = (int) level.getHole().getPlaats().getY() - level.getHole().getStraal();
-		g.drawImage(holeImg, holeX, holeY, 2 * level.getHole().getStraal(), 2 * level.getHole().getStraal(), this);
+		for(Planeet planeet : level.getPlaneten())
+			planeet.drawme(g, this);
+		level.getHole().drawme(g, this);
 		
-		for (int i = 0; i < level.getSatellieten().length; i++) {
-			int straal = level.getSatellieten()[i].getStraal();
-			int satellietX = (int) level.getSatellieten()[i].getPlaats().getX() - level.getSatellieten()[i].getStraal();
-			int satellietY = (int) level.getSatellieten()[i].getPlaats().getY() - level.getSatellieten()[i].getStraal();
-			g.drawImage(satelliet_afbeeldingen[i], satellietX, satellietY, 2 * straal, 2 * straal, this);
-		}
+		for(Satelliet satelliet : level.getSatellieten())
+			satelliet.drawme(g, this);
 		
 		if (!level.getHole().getScored()) {
 			if (level.getGolfbal().outOfBounds(GameMain.BREEDTE, GameMain.HOOGTE)) {
 				OutOfBoundsBox.drawBox(g, level.getGolfbal(), GameMain.BREEDTE, GameMain.HOOGTE);
 			}
-			
-			Image golfbalImg = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "golfbal.png")).getImage();
-			int golfbalX = (int) level.getGolfbal().getPlaats().getX() - level.getGolfbal().getStraal();
-			int golfbalY = (int) level.getGolfbal().getPlaats().getY() - level.getGolfbal().getStraal();
-			g.drawImage(golfbalImg, golfbalX, golfbalY, 2 * level.getGolfbal().getStraal(),
-					2 * level.getGolfbal().getStraal(), this);
-			
+			level.getGolfbal().drawme(g, this);
 			if (level.getGolfbal().isStationary()) {
 				Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
 			}

@@ -1,5 +1,7 @@
 package spelelementen;
 
+import java.awt.Image;
+
 import gui_componenten.GameMain;
 import tools.Vector;
 
@@ -7,8 +9,8 @@ public class Bal extends Cirkel {
 	private boolean stationary = true;
 	private boolean currently_coliding = false;
 
-	public Bal(Vector plaats, int massa, int straal) {
-		super(plaats.clone(), massa, straal);
+	public Bal(Vector plaats, int massa, int straal, Image image) {
+		super(plaats.clone(), massa, straal, image);
 	}
 
 	public void Correctie(Cirkel ColidingPlanet) {
@@ -26,7 +28,7 @@ public class Bal extends Cirkel {
 	}
 
 	public Bal clone() {
-		Bal dolly = new Bal(getPlaats().clone(), getMassa(), getStraal());
+		Bal dolly = new Bal(getPlaats().clone(), getMassa(), getStraal(),getImage());
 		dolly.setSnelheid(this.getSnelheid());
 		dolly.setStationary(this.isStationary());
 		return dolly;

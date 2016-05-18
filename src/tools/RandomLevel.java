@@ -1,9 +1,11 @@
 package tools;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
 
 import gui_componenten.GameMain;
+import gui_componenten.ImageHandler;
 import spelelementen.Bal;
 import spelelementen.Cirkel;
 import spelelementen.Hole;
@@ -14,6 +16,8 @@ import spelelementen.Satelliet;
 public class RandomLevel {
 	private final static double RESERVED = 1.5;
 	private final static double DICHTHEID = 1;
+	
+	private final static ImageHandler imghandler = new ImageHandler();
 
 	public static Level GenerateRandomLevel() {
 		Random rand = new Random();
@@ -35,7 +39,7 @@ public class RandomLevel {
 			int massa = (int) (DICHTHEID * straal * straal);
 			int x = rand.nextInt(GameMain.BREEDTE - straal * 2) + straal; // kan een positie nemen in de breedte van het scherm zonder de straal 
 			int y = rand.nextInt(GameMain.HOOGTE - straal * 2) + straal; // hetzelfde maar voor de breedte
-			Planeet planeet = new Planeet(x, y, massa, straal);
+			Planeet planeet = new Planeet(x, y, massa, straal,null);
 			int reserveerde_straal;
 			if (contains(indexen_van_planeten_met_satelliet, nr_initialized_planets)) {
 				double hoeksnelheid = ((rand.nextDouble() * 2) + 3) * RandomSign();
@@ -43,12 +47,12 @@ public class RandomLevel {
 				double afstand_tot_planeet = (rand.nextInt(5) + 4) * 10;
 				int straalmaan = rand.nextInt(6) + 15;
 				satellieten[nr_initialized_satelites] = new Satelliet(hoeksnelheid, planeet, afstand_tot_planeet, hoek,
-						straalmaan);
+						straalmaan,null);
 				reserveerde_straal = (int) (RESERVED * (afstand_tot_planeet + planeet.getStraal() + 2 * straalmaan));
 			} else {
 				reserveerde_straal = (int) (RESERVED * planeet.getStraal());
 			}
-			Cirkel bezetgebied = new Cirkel(x, y, 0, reserveerde_straal);
+			Cirkel bezetgebied = new Cirkel(x, y, 0, reserveerde_straal,null);
 
 			boolean checkcoliding = true;
 
@@ -60,8 +64,11 @@ public class RandomLevel {
 
 			if (checkcoliding) {
 				planeten[nr_initialized_planets] = planeet;
-				if (contains(indexen_van_planeten_met_satelliet, nr_initialized_planets))
+				planeet.setImage(imghandler.PlaneetImage());
+				if (contains(indexen_van_planeten_met_satelliet, nr_initialized_planets)) {
+					satellieten[nr_initialized_satelites].setImage(imghandler.MaanImage());
 					nr_initialized_satelites++;
+				}
 				nr_initialized_planets++;
 				reserveerde_ruimtes.add(bezetgebied);
 			}
@@ -80,11 +87,11 @@ public class RandomLevel {
 		// een random straal tussen 30 en 100 en een massa die afhankelijk is
 		// van die straal
 
-		Hole hole = new Hole(planeten[rand.nextInt(aantalplaneten)], rand.nextDouble() * 2 * Math.PI, 20);
+		Hole hole = new Hole(planeten[rand.nextInt(aantalplaneten)], rand.nextDouble() * 2 * Math.PI, 20,imghandler.HoleImage());
 		// maakt een hole op een wilekeurige planeet
 		int kwadrant = geefkwadrant(hole.getPlaats());
 		Vector startPos = geefplaats(kwadrant);
-		Bal golfbal = new Bal(startPos, 1, 10);
+		Bal golfbal = new Bal(startPos, 1, 10,imghandler.BalImage());
 		return new Level(planeten, satellieten, golfbal, hole, startPos, 0);
 
 	}
