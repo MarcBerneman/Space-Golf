@@ -12,17 +12,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import spelelementen.Level;
 import tools.LevelQueue;
 
-public class PlayPanel extends JPanel implements ActionListener, KeyListener {
+public class PlayPanel extends JPanel implements ActionListener {
 	private LevelPanel levelpanel;
 	private final JButton Reset = new JButton("Reset");
 	private final JButton Quit = new JButton("Quit");
 	private GameMain window;
 	private final LevelQueue queue;
-
-	static boolean pause = false;
-
+	
 	public PlayPanel(GameMain window, int level) {
 		queue = new LevelQueue(level);
 		levelpanel = new LevelPanel(queue.NextLevel());
@@ -31,8 +30,7 @@ public class PlayPanel extends JPanel implements ActionListener, KeyListener {
 		Container buttons = new Container();
 		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 		this.window = window;
-		levelpanel.information.setFocusable(false);
-		levelpanel.information.setMaximumSize(new Dimension(130, 18));
+		levelpanel.information.setEditable(false);
 		buttons.add(Reset);
 		levelpanel.Next.setVisible(false);
 		levelpanel.Next.setBackground(Color.GREEN);
@@ -40,53 +38,36 @@ public class PlayPanel extends JPanel implements ActionListener, KeyListener {
 		buttons.add(Quit);
 		buttons.add(levelpanel.information);
 		add(buttons);
-		levelpanel.information.setOpaque(false);
-		levelpanel.information.setBackground(new Color(0, 0, 0, 0));
+		//levelpanel.information.setOpaque(false);
+		//levelpanel.information.setBackground(new Color(0, 0, 0, 0));
 		add(levelpanel);
 
 		Reset.addActionListener(this);
 		Quit.addActionListener(this);
 		levelpanel.Next.addActionListener(this);
 		setFocusable(true);
-		addKeyListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == Reset) {
-			if(!levelpanel.getLevel().getHole().getScored()) {
-				levelpanel.getLevel().ResetBall();
-				levelpanel.getLevel().getHole().setScored(false);
+			Level level = levelpanel.getLevel();
+			if(!level.getHole().getScored() && !level.getGolfbal().getPlaats().equals(level.getStartPos())) {
+				level.ResetBall();
+				if(GameMain.totalstrokes != -1) GameMain.totalstrokes++;
 			}
 		} else if (e.getSource() == Quit) {
 			window.switchPanel();
 		} else if (e.getSource() == levelpanel.Next) {
-			window.switchPanel(new PlayPanel(window,queue.getCurrentLevel()));
+			if(queue.getCurrentLevel() < 7)
+				window.switchPanel(new PlayPanel(window,queue.getCurrentLevel()));
+			else {
+				window.switchPanel(new WinPanel(window));
+				GameMain.totalstrokes = -1;
+			}
 		}
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		System.out.println("key pressed");
-		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_P) {
-			levelpanel.setLevel(queue.NextLevel());
-			pause = true;
-			System.out.println("paused");
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public LevelQueue getQueue() {
 		return queue;
