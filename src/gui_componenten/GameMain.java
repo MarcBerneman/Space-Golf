@@ -15,6 +15,7 @@ public class GameMain extends JPanel {
 	public final static double AIM_TIME = 1;
 	public final static int BREEDTE = 1300, HOOGTE = 712;
 
+	MusicPlayer music;
 	private final static JFrame frame = new JFrame("Space-Golf");
 	private JPanel activePanel;
 
@@ -32,6 +33,8 @@ public class GameMain extends JPanel {
 		activePanel = new MainMenuPanel(this); // het eerste paneel dat getoond wordt
 		add(activePanel);
 		setPreferredSize(activePanel.getPreferredSize());
+		music = new MusicPlayer("2001-_A_Space_Odyssey.wav", true);
+		music.run();
 	}
 
 	public void switchPanel(JPanel toActivate) {
