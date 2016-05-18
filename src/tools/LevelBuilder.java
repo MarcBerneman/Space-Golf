@@ -14,7 +14,6 @@ import spelelementen.Planeet;
 import spelelementen.Satelliet;
 
 public class LevelBuilder {
-	private final int aantal_levels = 6;
 	private String level;
 	private static final String RESOURCE_FOLDER = "textfiles/";
 	private static final String fileName = RESOURCE_FOLDER + "Levels.txt";

@@ -9,7 +9,7 @@ public class ImageHandler {
 	private int maancounter = 0;
 	private final static String IMAGE_FOLDER = "images/";
 	private final static int NR_PLANET_IMAGES = 14;
-	private final static int NR_MOON_IMAGES = 10; 
+	private final static int NR_MOON_IMAGES = 9; 
 	
 	public Image BalImage() {
 		return new ImageIcon(getClass().getResource(IMAGE_FOLDER + "golfbal.png")).getImage();

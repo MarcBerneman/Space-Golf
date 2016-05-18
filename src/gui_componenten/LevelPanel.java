@@ -46,15 +46,6 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		planeet_afbeeldingen = new Image[level.getPlaneten().length];
 		satelliet_afbeeldingen = new Image[level.getSatellieten().length];
 		setBackground(Color.BLACK);
-		
-		for (int i = 0; i < level.getPlaneten().length; i++) {
-			planeet_afbeeldingen[i] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "planeet" + i + ".png")).getImage();
-		}
-		
-		for (int i = 0; i < level.getSatellieten().length; i++) {
-			satelliet_afbeeldingen[i] = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "maan" + i + ".png")).getImage();
-		}
-		
 		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
 		timer.start();
 	}

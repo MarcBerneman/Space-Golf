@@ -21,8 +21,8 @@ public class RandomLevel {
 
 	public static Level GenerateRandomLevel() {
 		Random rand = new Random();
-		int aantalplaneten = rand.nextInt(3) + 3;
-		int aantalsatellieten = rand.nextInt(2) + 1;
+		int aantalplaneten = rand.nextInt(3) + 5;
+		int aantalsatellieten = rand.nextInt(aantalplaneten-2) + 2;
 		if (aantalsatellieten > aantalplaneten)
 			aantalsatellieten = rand.nextInt(2) + 1;
 		int aantal_loops = 0;
