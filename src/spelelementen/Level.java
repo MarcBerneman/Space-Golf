@@ -100,4 +100,8 @@ public class Level {
 		return par;
 	}
 
+	public Vector getStartPos() {
+		return startPos;
+	}
+
 }
