@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class WinPanel extends JPanel implements ActionListener{
+	private static final long serialVersionUID = 1801191493456427124L;
 	private JTextField wininformation;
 	private JButton menu = new JButton("Menu");
 	private GameMain window;

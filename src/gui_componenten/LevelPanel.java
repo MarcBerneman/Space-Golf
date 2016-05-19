@@ -16,22 +16,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-import spelelementen.Bal;
-import spelelementen.Level;
-import spelelementen.OutOfBoundsBox;
-import spelelementen.Planeet;
-import spelelementen.Satelliet;
-import spelelementen.Traject;
+import spelelementen.*;
 import tools.Vector;
 
-@SuppressWarnings("serial")
 public class LevelPanel extends JPanel implements MouseListener, ActionListener, MouseMotionListener {
+	private static final long serialVersionUID = 335863881169194831L;
 	private Level level;
 	private Timer timer = new Timer((int) (GameMain.DeltaT * 1000), this);
 	private Vector muis_positie = new Vector(0, 0);
 	final static String IMAGE_FOLDER = "images/";
-	private Image[] planeet_afbeeldingen;
-	private Image[] satelliet_afbeeldingen;
 	private Image Background;
 
 	public final JTextField information = new JTextField();
@@ -43,8 +36,6 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		setFocusable(true);
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		planeet_afbeeldingen = new Image[level.getPlaneten().length];
-		satelliet_afbeeldingen = new Image[level.getSatellieten().length];
 		setBackground(Color.BLACK);
 		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
 		timer.start();
@@ -84,23 +75,20 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 	public void actionPerformed(ActionEvent e) {
 		level.turn();
 		repaint();
-		String text = "Strokes: " + level.getNr_strokes() + ", Par: " + (level.getPar() > 0 ? level.getPar() : "N/A")
-				+ (GameMain.totalstrokes != -1 ? ", Total strokes: " + GameMain.totalstrokes : "");
-		information.setText(text);
-		information.setSize(new Dimension((int) (5.5 * text.length()), 26));
 		if (level.getHole().getScored())
 			Next.setVisible(true);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Bal b = level.getGolfbal();
 		if (!level.getHole().getScored()) {
+			Bal b = level.getGolfbal();
 			if (b.isStationary()) {
 				b.setSnelheid(b.InitialSpeed(muis_positie));
 				b.setStationary(false);
 				level.incrementStrokes();
 				if(GameMain.totalstrokes != -1) GameMain.totalstrokes++;
+				updateInformation();
 			}
 		}
 
@@ -111,6 +99,12 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		muis_positie = new Vector(e.getX(), e.getY());
 		repaint();
 
+	}
+	
+	public void updateInformation() {
+		String text = "Strokes: " + level.getNr_strokes() + ", Par: " + (level.getPar() > 0 ? level.getPar() : "N/A")
+				+ (GameMain.totalstrokes != -1 ? ", Total strokes: " + GameMain.totalstrokes : "");
+		information.setText(text);
 	}
 
 	@Override

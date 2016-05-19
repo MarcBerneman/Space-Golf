@@ -6,7 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import tools.LevelQueue;
+
 public class LevelMenuPanel extends JPanel implements ActionListener{
+	private static final long serialVersionUID = 2551818852864376058L;
 	private final JButton[] levels = new JButton[6];
 	private final JButton menu;
 	private GameMain window;
@@ -30,7 +33,7 @@ public class LevelMenuPanel extends JPanel implements ActionListener{
 			window.switchPanel();
 		for(int i = 0 ; i < 6 ; i++)
 			if(e.getSource() == levels[i]) {
-				PlayPanel p = new PlayPanel(window, i + 1);
+				PlayPanel p = new PlayPanel(window, new LevelQueue(i + 1));
 				window.switchPanel(p);
 				break;
 			}

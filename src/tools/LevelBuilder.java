@@ -7,11 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import gui_componenten.ImageHandler;
-import spelelementen.Bal;
-import spelelementen.Hole;
-import spelelementen.Level;
-import spelelementen.Planeet;
-import spelelementen.Satelliet;
+import spelelementen.*;
 
 public class LevelBuilder {
 	private String level;

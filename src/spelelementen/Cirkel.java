@@ -3,8 +3,6 @@ package spelelementen;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import javax.swing.JPanel;
-
 import gui_componenten.LevelPanel;
 import tools.Vector;
 
