@@ -10,11 +10,11 @@ import spelelementen.*;
 public class RandomLevel {
 	private final static double RESERVED = 1.5;
 	private final static double DICHTHEID = 1;
-	
-	private final static ImageHandler imghandler = new ImageHandler();
 
 	public static Level GenerateRandomLevel() {
 		Random rand = new Random();
+		ImageHandler imghandler = new ImageHandler();
+		
 		int aantalplaneten = rand.nextInt(3) + 5;
 		int aantalsatellieten = rand.nextInt(aantalplaneten-2) + 2;
 		if (aantalsatellieten > aantalplaneten)

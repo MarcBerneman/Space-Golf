@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import spelelementen.Level;
 import tools.LevelQueue;
@@ -18,10 +19,12 @@ public class PlayPanel extends JPanel implements ActionListener {
 	private final JButton Quit = new JButton("Quit");
 	private GameMain window;
 	private final LevelQueue queue;
+	private final JTextField information = new JTextField();
+	private final JButton Next = new JButton("Next");
 
 	public PlayPanel(GameMain window, LevelQueue queue) {
 		this.queue = queue;
-		levelpanel = new LevelPanel(queue.NextLevel());
+		levelpanel = new LevelPanel(queue.NextLevel(),this);
 		this.window = window;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -30,16 +33,16 @@ public class PlayPanel extends JPanel implements ActionListener {
 		Reset.addActionListener(this);
 		buttons.add(Reset);
 
-		levelpanel.Next.setBackground(Color.GREEN);
-		levelpanel.Next.setVisible(false);
-		levelpanel.Next.addActionListener(this);
-		buttons.add(levelpanel.Next);
+		Next.setBackground(Color.GREEN);
+		Next.setVisible(false);
+		Next.addActionListener(this);
+		buttons.add(Next);
 
 		Quit.addActionListener(this);
 		buttons.add(Quit);
 
 		levelpanel.updateInformation();
-		buttons.add(levelpanel.information);
+		buttons.add(information);
 
 		add(buttons);
 		add(levelpanel);
@@ -59,7 +62,7 @@ public class PlayPanel extends JPanel implements ActionListener {
 		} else if (e.getSource() == Quit) {
 			window.switchPanel();
 			GameMain.totalstrokes = -1;
-		} else if (e.getSource() == levelpanel.Next) {
+		} else if (e.getSource() == Next) {
 			if (queue.NextIsWinPanel()) {
 				window.switchPanel(new WinPanel(window));
 				GameMain.totalstrokes = -1;
@@ -72,4 +75,14 @@ public class PlayPanel extends JPanel implements ActionListener {
 	public LevelQueue getQueue() {
 		return queue;
 	}
+
+	public JTextField getInformation() {
+		return information;
+	}
+
+	public JButton getNext() {
+		return Next;
+	}
+	
+	
 }

@@ -26,12 +26,11 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 	private Vector muis_positie = new Vector(0, 0);
 	final static String IMAGE_FOLDER = "images/";
 	private Image Background;
-
-	public final JTextField information = new JTextField();
-	public final JButton Next = new JButton("Next");
+	private PlayPanel playpanel;
 	
-	public LevelPanel(Level level) {
+	public LevelPanel(Level level, PlayPanel playpanel) {
 		this.level = level;
+		this.playpanel = playpanel;
 		setPreferredSize(new Dimension(GameMain.BREEDTE, GameMain.HOOGTE));
 		setFocusable(true);
 		addMouseListener(this);
@@ -76,7 +75,7 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		level.turn();
 		repaint();
 		if (level.getHole().getScored())
-			Next.setVisible(true);
+			playpanel.getNext().setVisible(true);
 	}
 
 	@Override
@@ -104,7 +103,7 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 	public void updateInformation() {
 		String text = "Strokes: " + level.getNr_strokes() + ", Par: " + (level.getPar() > 0 ? level.getPar() : "N/A")
 				+ (GameMain.totalstrokes != -1 ? ", Total strokes: " + GameMain.totalstrokes : "");
-		information.setText(text);
+		playpanel.getInformation().setText(text);
 	}
 
 	@Override
