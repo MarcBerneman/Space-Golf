@@ -27,6 +27,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//Play = begin vanaf level 1; PlayLevel = kies een level; Playrandom = geeft random level
 		if (e.getSource() == Play) {
 			GameMain.totalstrokes = 0;
 			PlayPanel p = new PlayPanel(window,new LevelQueue(LevelQueue.REALGAME));

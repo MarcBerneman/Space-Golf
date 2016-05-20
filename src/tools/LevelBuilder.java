@@ -20,10 +20,15 @@ public class LevelBuilder {
 
 
 	public LevelBuilder(int level) {
+		//constructor krijgt het nummer van de gewenste level mee als type int en wordt 
+		//omgezet tot String om te vergelijken met de afgelezen file (zie build())
 		this.level = "L" + level;
 	}
 
 	public Level Build() {
+		//juiste level wordt gezocht (zie structuur van Levels.txt,bv. "L1"), elke lijn wordt omgezet
+		//naar een bepaalde atribuut van Level door de specifieke methodes in deze klasse,
+		//en worden uiteindelijk als argumenten gegeven in de constructor van Level
 		Level lev = null;
 		try {
 
@@ -89,15 +94,22 @@ public class LevelBuilder {
 	}
 
 	private Satelliet[] satellietenBuilder(String[] theLine, Planeet[] planeten) {
+		//zie structuur Levels.txt
 		int aantal_sat = Integer.parseInt(theLine[0]);
 		Satelliet[] satellieten = null;
 		satellieten = new Satelliet[aantal_sat];
+		
 		for (int i = 0; i < aantal_sat; i++) {
 			double hoeksnelheid = Double.parseDouble(theLine[i + 1]);
+			
 			Planeet planeet = planeten[Integer.parseInt(theLine[i + 1 + aantal_sat])];
+			
 			double afstand_tot_planeet = Double.parseDouble(theLine[i + 1 + 2 * aantal_sat]);
+			
 			double beginhoek = Double.parseDouble(theLine[i + 1 + 3 * aantal_sat]);
+			
 			int straal = Integer.parseInt(theLine[i + 1 + 4 * aantal_sat]);
+			
 			satellieten[i] = new Satelliet(hoeksnelheid, planeet, afstand_tot_planeet, beginhoek, straal,imghandler.MaanImage());
 		}
 		return satellieten;
@@ -106,11 +118,16 @@ public class LevelBuilder {
 	private Planeet[] planetenBuilder(String[] theLine) {
 		int aantal_planeten = Integer.parseInt(theLine[0]);
 		Planeet[] planeten = new Planeet[aantal_planeten];
+		
 		for (int i = 0; i < aantal_planeten; i++) {
+			
 			Vector pos = new Vector(Integer.parseInt(theLine[i + 1]),
 					Integer.parseInt(theLine[i + 1 + aantal_planeten]));
+			
 			int straal = Integer.parseInt(theLine[i + 1 + 2 * aantal_planeten]);
+			
 			int massa = (int) (DICHTHEID * straal * straal);
+			
 			planeten[i] = new Planeet(pos, massa, straal,imghandler.PlaneetImage());
 		}
 		return planeten;

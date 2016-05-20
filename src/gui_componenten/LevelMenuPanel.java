@@ -29,6 +29,7 @@ public class LevelMenuPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//gaat terug naar het menu of kiest een level
 		if(e.getSource() == menu)
 			window.switchPanel();
 		for(int i = 0 ; i < 6 ; i++)

@@ -19,7 +19,7 @@ public class Satelliet extends Cirkel {
 		this.setSnelheid(snelheidberekening());
 	}
 
-	public void move() {//zorgt er voor dat de satelliet draait rond de planeet
+	public void move() {//zorgt er voor dat de satelliet rond de planeet draait
 		theta += hoeksnelheid * GameMain.DeltaT;
 		Vector nieuwe_plaats = planeet.getPlaats().clone();
 		nieuwe_plaats.optelling(new Vector(omwentelingstraal * Math.cos(theta), omwentelingstraal * Math.sin(theta)));

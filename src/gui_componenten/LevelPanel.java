@@ -3,17 +3,13 @@ package gui_componenten;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import spelelementen.*;
@@ -57,7 +53,7 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 			if (level.getGolfbal().isStationary()) {
 				Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
 			}
-		}//zolang er niet is gescooord, als de golfbal buiten het scherm komt, komt de box tevoorschijn, wordt de golfbal getekend en berekent men het traject
+		}//zolang er niet is gescoord, als de golfbal buiten het scherm komt, komt de box tevoorschijn, wordt de golfbal getekend en berekent men het traject
 	}
 
 	public Level getLevel() {

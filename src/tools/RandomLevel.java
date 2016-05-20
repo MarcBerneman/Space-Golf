@@ -138,14 +138,14 @@ public class RandomLevel {
 			}// checkt of het getal dat je er aan wilt toevoegen er al in zit, indien nee voegt het het toe en gaat het naar het volgend getal, indien ja doet het het opnieuw
 		}
 		return output;
-	}//maakt een lijst van willekeurige getallen van (start) tot (end) die elk maximaal een keer voorkomen, de lengte van die lijst wordt gegeven door aantal
+	}//maakt een lijst van willekeurige getallen van (start) tot (end) die elk maximaal één keer voorkomen, de lengte van die lijst wordt gegeven door aantal
 
 	private static boolean contains(int[] array, int nummer) {
 		for (int element : array)
 			if (element == nummer)
 				return true;
 		return false;
-	}//ziet of een lijst een getal bevat
+	}//ziet of een lijst een bepaald getal bevat
 
 	private static int RandomSign() {
 		Random rand = new Random();

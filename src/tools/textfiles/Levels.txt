@@ -1,3 +1,6 @@
+//Dit is de structuur voor de LevelBuilder. Een atribuut dat tussen haakjes staat betekent dat datzelfde
+//atribuut voor elk object na elkaar wordt geschreven, dus bv. de verschillende stralen der planeten na elkaar
+
 level
 aantal planeten, (int x), (int y), (int straal)
 aantal satellieten, (double hoeksnelheid), (Planeet planeet), (double afstand_tot_planeet), (double beginhoek), (int straal)

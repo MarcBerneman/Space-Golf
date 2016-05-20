@@ -53,16 +53,20 @@ public class PlayPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == Reset) {
+			//bal terug naar startpositie en strokes wordt aangepast
 			Level level = levelpanel.getLevel();
 			if (!level.getHole().getScored() && !level.getGolfbal().getPlaats().equals(level.getStartPos())) {
 				level.ResetBall();
 				if (GameMain.totalstrokes != -1)
 					GameMain.totalstrokes++;
+					levelpanel.updateInformation();
 			}
 		} else if (e.getSource() == Quit) {
 			window.switchPanel();
 			GameMain.totalstrokes = -1;
 		} else if (e.getSource() == Next) {
+			//als laaste level is uitgespeeld geeft dit het WinPanel, anders de volgende level
+			//voor random level geef dit een andere random level
 			if (queue.NextIsWinPanel()) {
 				window.switchPanel(new WinPanel(window));
 				GameMain.totalstrokes = -1;
