@@ -51,7 +51,7 @@ public class Cirkel {
 	
 	public void drawme(Graphics g, LevelPanel panel) {
 		g.drawImage(image, (int) (plaats.getX() - straal), (int) (plaats.getY() - straal), 2 * straal, 2 * straal, panel);
-	}
+	}// tekent de cirkel met meegegeven afbeelding op de corrrecte plaats
 
 	public Vector getPlaats() {
 		return plaats;

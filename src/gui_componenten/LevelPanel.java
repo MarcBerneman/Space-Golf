@@ -25,7 +25,6 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 	private Timer timer = new Timer((int) (GameMain.DeltaT * 1000), this);
 	private Vector muis_positie = new Vector(0, 0);
 	final static String IMAGE_FOLDER = "images/";
-	private Image Background;
 	private PlayPanel playpanel;
 	
 	public LevelPanel(Level level, PlayPanel playpanel) {
@@ -36,20 +35,19 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		setBackground(Color.BLACK);
-		Background = new ImageIcon(getClass().getResource(IMAGE_FOLDER + "space_11.jpg")).getImage();
 		timer.start();
 	}
 	
 	public void paint(Graphics g) {
+		ImageHandler imghandler = new ImageHandler();
 		super.paint(g);
-		g.drawImage(Background, 0, 0, getWidth(), getHeight(), this);
-		
+		g.drawImage(imghandler.BackgroundImage(), 0, 0, getWidth(), getHeight(), this);
 		for(Planeet planeet : level.getPlaneten())
 			planeet.drawme(g, this);
 		level.getHole().drawme(g, this);
-		
 		for(Satelliet satelliet : level.getSatellieten())
 			satelliet.drawme(g, this);
+		//tekent de achtergrond, de planeten, het zwart gat en de manen
 		
 		if (!level.getHole().getScored()) {
 			if (level.getGolfbal().outOfBounds(GameMain.BREEDTE, GameMain.HOOGTE)) {
@@ -59,7 +57,7 @@ public class LevelPanel extends JPanel implements MouseListener, ActionListener,
 			if (level.getGolfbal().isStationary()) {
 				Traject.Aim(g, level.getGolfbal(), level.getPlaneten(), muis_positie, level.getHemellichamen());
 			}
-		}
+		}//zolang er niet is gescooord, als de golfbal buiten het scherm komt, komt de box tevoorschijn, wordt de golfbal getekend en berekent men het traject
 	}
 
 	public Level getLevel() {

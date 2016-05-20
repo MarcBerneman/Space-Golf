@@ -15,15 +15,15 @@ public class OutOfBoundsBox {
 		Vector midden = new Vector(breedte / 2, hoogte / 2);
 		Vector midden_to_bal = Vector.aftrekking(bal.getPlaats(), midden);
 		double theta;
-		if (midden_to_bal.getY() <= 0)
+		if (midden_to_bal.getY() <= 0)// je bepaalt de hoek waar de bal is
 			theta = Math.acos(midden_to_bal.getX() / midden_to_bal.modulus());
 		else
 			theta = 2 * Math.PI - Math.acos(midden_to_bal.getX() / midden_to_bal.modulus());
-		double phi = Math.atan(((double) hoogte) / (double) breedte);
+		double phi = Math.atan(((double) hoogte) / (double) breedte);// dit is de beginhoek
 		double x;
 		double y;
 		double rico = (bal.getPlaats().getY() - midden.getY()) / (bal.getPlaats().getX() - midden.getX());
-		if (theta >= 2 * Math.PI - phi) {
+		if (theta >= 2 * Math.PI - phi) {// de verschillende gevallen waar de box moet komen staan
 			x = breedte;
 			y = rico * (x - midden.getX()) + midden.getY();
 		} else if (theta >= Math.PI + phi) {
@@ -40,7 +40,7 @@ public class OutOfBoundsBox {
 			y = rico * (x - midden.getX()) + midden.getY();
 		}
 		return new Vector(x, y);
-	}
+	}//dit maakt een box aan die de bal volgt wanneer hij uit het scherm komt, met daarin de afstand tusse de randen van het scherm en de bal
 
 	private static double distance(Bal bal, int breedte, int hoogte) {
 		double afstand = Vector.aftrekking(bal.getPlaats(), box_plaats(bal, breedte, hoogte)).modulus();

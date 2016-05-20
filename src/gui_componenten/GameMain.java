@@ -26,7 +26,6 @@ public class GameMain extends JPanel{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(new GameMain());
 		frame.pack();
-//		frame.setFocusable(true);
 		frame.setVisible(true);
 	}
 

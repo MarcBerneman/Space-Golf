@@ -31,7 +31,7 @@ public class Level {
 			} else {
 				hemellichamen[i] = getSatellieten()[i - planeten.length];
 			}
-		}
+		}//maakt een lijst aan van alle planeteten en satellieten
 	}
 
 	public void ResetBall() {

@@ -25,7 +25,7 @@ public class Bal extends Cirkel {
 		if (snelheid.modulus() > GameMain.MAX_POWER)
 			snelheid.scalair_vermenigvuldiging(GameMain.MAX_POWER / snelheid.modulus());
 		return Vector.scalair_vermenigvuldiging(GameMain.MOUSE_SPEED_COEFFICIENT, snelheid);
-	}
+	}//de snelheid is de vector van de golfbal tot de muis, deze vector kan een bepaalde,gegeven waarde niet overschrijden
 
 	public Bal clone() {
 		Bal dolly = new Bal(getPlaats().clone(), getMassa(), getStraal(),getImage());
@@ -39,7 +39,7 @@ public class Bal extends Cirkel {
 		double y = getPlaats().getY();
 		int r = getStraal();
 		return (((x + r) < 0) || ((y + r) < 0) || ((x - r) > breedte) || ((y - r) > hoogte));
-	}
+	}//checkt of de bal buiten het scherm is, niet het middelpunt van de bal maar wel de voledige bal
 
 	public boolean isStationary() {
 		return stationary;
