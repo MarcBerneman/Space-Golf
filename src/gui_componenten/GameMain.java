@@ -36,7 +36,7 @@ public class GameMain extends JPanel{
 		add(activePanel);
 		setPreferredSize(activePanel.getPreferredSize());
 		music = new MusicPlayer("2001-_A_Space_Odyssey.wav", true);
-		music.run();
+		//music.run();
 		setFocusable(true);
 	}
 
